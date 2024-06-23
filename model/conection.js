@@ -39,9 +39,10 @@ async function getUser(email) {
 }
 
 async function setUser(email, password, name, birth) {
+    const date = new Date().toISOString().split('T')[0];
     let {records, summary} = await driver.executeQuery(
-        'CREATE (u:User { email: $email, password: $password})-[:private]->(p:Profile {name: $name, birthday: date($birth)})',
-        { email : email, password: password, name: name, birth: birth},
+        'CREATE (u:User { email: $email, password: $password})-[:private]->(p:Profile {name: $name, birthday: date($birth), created: date($date)})',
+        { email : email, password: password, name: name, birth: birth, date : date},
         { database : 'neo4j'}
     );
 
@@ -64,9 +65,10 @@ async function setUserPrivateID(email, uuid) {
 }
 
 async function setPosts(uuid, post) {
+    const date = new Date().toISOString().split('T')[0];
     let {records, summary} = await driver.executeQuery(
-        'MATCH (a:Profile) WHERE a.uuid = $uuid CREATE (a)-[:post]->(b:Poem {body: $body, title: $title}) return b',
-        {uuid : uuid, body : post.body, title : post.title},
+        'MATCH (a:Profile) WHERE a.uuid = $uuid CREATE (a)-[:post]->(b:Poem {body: $body, title: $title, created: date($date)}) return b',
+        {uuid : uuid, body : post.body, title : post.title, date: date},
         { database : 'neo4j' }
     );
 

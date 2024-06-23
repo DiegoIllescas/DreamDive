@@ -86,7 +86,9 @@ app.post('/posts/add', async (req, res) => {
     const cookie = req.cookies['connect.sid'].substring(2,34);
     if(store.sessions[cookie]) {
         if(await posts.create(JSON.parse(store.sessions[cookie]).user.uuid, req.body)) {
-            res.status(200).json({ok: true});
+            res.status(200).json({success: true});
+        }else{
+            res.status(400).json({success: false, error: "Something went wrong"})
         }
     }else{
         res.redirect('/');

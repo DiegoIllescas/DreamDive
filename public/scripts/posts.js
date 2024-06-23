@@ -3,6 +3,10 @@ async function handleSubmit() {
     const title = document.getElementById('title').value;
     //Validaciones ->
 
+    if(!(body && title)) {
+        return;
+    }
+
     //Peticion ->
     const options = {
         method: 'POST',
@@ -26,6 +30,7 @@ async function handleSubmit() {
                 console.log(data.error);
             }
         });
+    return;
 }
 
 const posts_container = document.getElementById('posts');
