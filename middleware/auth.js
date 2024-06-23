@@ -1,5 +1,6 @@
 const { getUser } = require('../model/conection');
 const crypto = require('crypto');
+const session = require('express-session');
 
 async function login(req, res) {
     const email = req.body.email;
@@ -18,7 +19,11 @@ async function login(req, res) {
         return res.status(400).json({success: false, error: 'Invalid login credentials'});
     }
 
-    return res.status(200).json({success: true});
+    req.session.auth = true;
+    req.session.user = {
+        email
+    };
+    return res.status(200).json({success: true, session: req.session});
 }
 
 module.exports = {
