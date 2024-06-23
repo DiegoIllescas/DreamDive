@@ -33,4 +33,34 @@ async function handleSubmit() {
     return;
 }
 
+async function search() {
+    const field = document.getElementById('search-field').value;
+
+    if(!field) {
+        return;
+    }
+
+    const options = {
+        method: 'POST',
+        mode: 'cors',
+        credentials: 'same-origin',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            field: field
+        })
+    }
+
+    await fetch ('http://192.168.0.18:4000/search', options)
+        .then(response => response.json())
+        .then(data => {
+            if(data.success) {
+                console.log(data.content);
+            }else{
+                console.log(data.error);
+            }
+        });
+}
+
 const posts_container = document.getElementById('posts');

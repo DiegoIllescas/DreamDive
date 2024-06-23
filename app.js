@@ -10,6 +10,7 @@ const cookieParser = require('cookie-parser')
 const auth = require('./middleware/auth');
 const users = require('./middleware/user');
 const posts = require('./middleware/posts');
+const entity = require('./middleware/entity');
 
 let app = express();
 
@@ -94,6 +95,8 @@ app.post('/posts/add', async (req, res) => {
         res.redirect('/');
     }
 });
+
+app.post('/search', entity.get);
 
 app.listen(4000);
 

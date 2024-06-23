@@ -35,7 +35,13 @@
         </div>
     </main>
     <footer>
-        <div class="search"></div>
+        <div class="search">
+            <form id="search" onsubmit="event.preventDefault()">
+                <label for="search-field">Buscar: </label><br>
+                <input type="text" name="search-field" id="search-field" required><br><br>
+            </form>
+            <button type="submit" form="search" onclick="search()">Buscar</button>
+        </div>
         <div class="recomended-users"></div>
         <div class="tendency"></div>
         <div class="footer"></div>

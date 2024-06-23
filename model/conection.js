@@ -65,9 +65,9 @@ async function setUserPrivateID(email, uuid) {
 }
 
 async function setPosts(uuid, post) {
-    const date = new Date().toISOString().split('T')[0];
+    const date = new Date().toISOString();
     let {records, summary} = await driver.executeQuery(
-        'MATCH (a:Profile) WHERE a.uuid = $uuid CREATE (a)-[:post]->(b:Poem {body: $body, title: $title, created: date($date)}) return b',
+        'MATCH (a:Profile) WHERE a.uuid = $uuid CREATE (a)-[:post]->(b:Poem {body: $body, title: $title, created: datetime($date)}) return b',
         {uuid : uuid, body : post.body, title : post.title, date: date},
         { database : 'neo4j' }
     );
@@ -75,9 +75,54 @@ async function setPosts(uuid, post) {
     return (summary.counters.updates().nodesCreated > 0);
 }
 
+async function getRecentPosts() {
+
+}
+
+async function searchUsers(pattern) {
+    let {records, summary} = await driver.executeQuery(
+        'MATCH (a:Profile) WHERE a.name CONTAINS $pattern OR a.uuid CONTAINS $pattern return a LIMIT 5',
+        { pattern: pattern },
+        { database : 'neo4j' }
+    );
+
+    let users = [];
+
+    for(let record of records) {
+        let userFound = {};
+        userFound.name = record.get('a').properties.name;
+        userFound.uuid = record.get('a').properties.uuid;
+        users.push(userFound);
+    }
+
+    return users;
+}
+
+async function seachPost(pattern) {
+    let {records, summary} = await driver.executeQuery(
+        'MATCH (a:Poem) WHERE a.title CONTAINS $pattern OR a.body CONTAINS $pattern return a ORDER BY a.created LIMIT 10',
+        { pattern: pattern },
+        { database : 'neo4j' }
+    );
+
+    let posts = [];
+
+    for(let record of records) {
+        let postFound = {};
+        postFound.title = record.get('a').properties.title;
+        postFound.body = record.get('a').properties.body;
+        posts.push(postFound);
+    }
+
+    return posts;
+}
+
 module.exports = {
     getUser,
     setUser,
     setUserPrivateID,
-    setPosts
+    setPosts,
+    getRecentPosts,
+    searchUsers,
+    seachPost
 }

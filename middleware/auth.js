@@ -1,6 +1,5 @@
 const { getUser } = require('../model/conection');
 const crypto = require('crypto');
-const session = require('express-session');
 
 async function login(req, res) {
     const email = req.body.email;
