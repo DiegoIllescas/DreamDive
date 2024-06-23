@@ -19,9 +19,11 @@ async function login(req, res) {
         return res.status(400).json({success: false, error: 'Invalid login credentials'});
     }
 
+    const uuid = user.uuid;
+
     req.session.auth = true;
     req.session.user = {
-        email
+        email, uuid
     };
     return res.status(200).json({success: true, session: req.session});
 }

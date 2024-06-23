@@ -21,7 +21,7 @@ let driver;
 
 async function getUser(email) {
     let {records, summary} = await driver.executeQuery(
-        'MATCH (p:User {email : $email}) RETURN p.email as email, p.password as password',
+        'MATCH (p:User {email : $email})-[:private]->(a:Profile) RETURN p.email as email, p.password as password, a',
         {email : email},
         {database : 'neo4j'}
     )
@@ -29,9 +29,10 @@ async function getUser(email) {
     let user = null;
 
     for(let record of records) {
-        user = {email: "", password: ""};
+        user = {email: "", password: "", uuid: ""};
         user.email = record.get('email');
         user.password = record.get('password');
+        user.uuid = record.get('a').properties.uuid;
     }
 
     return user;
@@ -52,7 +53,18 @@ async function setUser(email, password, name, birth) {
 
 }
 
+async function setUserPrivateID(email, uuid) {
+    let {records, summary} = await driver.executeQuery(
+        'MATCH (a:User)-[:private]->(b:Profile) WHERE a.email = $email SET b.uuid = $uuid return a',
+        { email : email, uuid: uuid},
+        { database : 'neo4j'}
+    );
+
+    return (summary.updateStatistics.updates().propertiesSet > 0);
+}
+
 module.exports = {
     getUser,
-    setUser
+    setUser,
+    setUserPrivateID
 }

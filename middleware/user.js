@@ -1,4 +1,4 @@
-const { getUser, setUser } = require('../model/conection');
+const { getUser, setUser, setUserPrivateID } = require('../model/conection');
 const crypto = require('crypto');
 
 async function create(req, res) {
@@ -31,6 +31,12 @@ async function create(req, res) {
     }
 }
 
+async function setUUID(email, uuid) {
+    
+
+    return await setUserPrivateID(email, uuid);
+}
+
 module.exports = {
-    create
+    create, setUUID
 }

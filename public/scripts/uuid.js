@@ -1,12 +1,9 @@
 async function handleSubmit() {
-    let email = document.getElementById("email").value;
-    let pass = document.getElementById("password").value;
+    const uuid = document.getElementById('uuid').value;
 
     //Validaciones aqui ->
 
-
-    //Envio de peticion ->
-
+    //Peticion al server ->
     const options = {
         method: 'POST',
         mode: 'cors',
@@ -15,12 +12,11 @@ async function handleSubmit() {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            email: email,
-            password: pass
+            uuid: uuid
         })
     };
 
-    await fetch("http://192.168.0.18:4000/login", options)
+    await fetch('http://192.168.0.18:4000/account/add', options)
         .then(response => response.json())
         .then(data => {
             if(data.success) {

@@ -40,11 +40,23 @@ app.get('/signup', (req, res) => {
 app.get('/home', (req, res) => {
     const cookie = req.cookies['connect.sid'].substring(2,34);
     if(store.sessions[cookie]) {
-        res.render('home');
+        if(JSON.parse(store.sessions[cookie]).user.uuid){
+            res.render('home');
+        }else{
+            res.redirect('/final-steps');
+        }
     }else{
         res.redirect('/');
     } 
+});
 
+app.get('/final-steps', (req, res) => {
+    const cookie = req.cookies['connect.sid'].substring(2,34);
+    if(store.sessions[cookie]) {
+        res.render('createAccount');
+    }else{
+        res.redirect('/');
+    } 
 });
 
 app.get('/identify', (req, res) => {
@@ -54,6 +66,20 @@ app.get('/identify', (req, res) => {
 app.post('/user/add', users.create);
 
 app.post('/login', auth.login);
+
+app.post('/account/add', async (req, res) => {
+    const cookie = req.cookies['connect.sid'].substring(2,34);
+    if(store.sessions[cookie]) {
+        if(await users.setUUID(JSON.parse(store.sessions[cookie]).user.email, req.body.uuid)) {
+            req.session.user.uuid = req.body.uuid;
+            res.status(200).json({success: true});
+        }else{
+            res.status(400).json({success : false, error: "Soething went wrong"});
+        }
+    }else{
+        res.redirect('/');
+    }
+});
 
 app.listen(4000);
 
