@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DreamDive - Inicio</title>
+    <link rel="stylesheet" href="css/style.css">
     <script src="scripts/posts.js"></script>
 </head>
 <body>
@@ -30,17 +31,16 @@
             </form>
             <button form="create-post" type="submit" onclick="handleSubmit()">Publicar</button>
         </div>
-        <div class="posts" id="posts">
-
-        </div>
+        
     </main>
     <footer>
         <div class="search">
             <form id="search" onsubmit="event.preventDefault()">
-                <label for="search-field">Buscar: </label><br>
-                <input type="text" name="search-field" id="search-field" required><br><br>
+                <input type="text" name="search-field" id="search-field" required>
             </form>
             <button type="submit" form="search" onclick="search()">Buscar</button>
+        </div>
+        <div class="main" id="main-container">
         </div>
         <div class="recomended-users"></div>
         <div class="tendency"></div>

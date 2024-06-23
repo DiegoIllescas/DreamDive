@@ -40,9 +40,25 @@ async function getUser(email) {
 
 async function setUser(email, password, name, birth) {
     const date = new Date().toISOString().split('T')[0];
+    const rand = Math.floor(Math.random() * 4);
+    let foto = "";
+    switch (rand) {
+        case 0:
+            foto = "imgs/blueprofile.png";
+            break;
+        case 1:
+            foto = "imgs/greenprofile.png";
+            break;
+        case 2:
+            foto = "imgs/purpleprofile.png";
+            break;
+        default:
+            foto = "imgs/redprofile.png";
+            break;            
+    }
     let {records, summary} = await driver.executeQuery(
-        'CREATE (u:User { email: $email, password: $password})-[:private]->(p:Profile {name: $name, birthday: date($birth), created: date($date)})',
-        { email : email, password: password, name: name, birth: birth, date : date},
+        'CREATE (u:User { email: $email, password: $password})-[:private]->(p:Profile {name: $name, birthday: date($birth), created: date($date), foto: $foto})',
+        { email : email, password: password, name: name, birth: birth, date : date, foto: foto},
         { database : 'neo4j'}
     );
 
@@ -92,6 +108,7 @@ async function searchUsers(pattern) {
         let userFound = {};
         userFound.name = record.get('a').properties.name;
         userFound.uuid = record.get('a').properties.uuid;
+        userFound.foto = record.get('a').properties.foto;
         users.push(userFound);
     }
 

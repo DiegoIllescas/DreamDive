@@ -2,6 +2,9 @@ async function handleSubmit() {
     const uuid = document.getElementById('uuid').value;
 
     //Validaciones aqui ->
+    if(!uuid) {
+        return;
+    }
 
     //Peticion al server ->
     const options = {

@@ -33,6 +33,35 @@ async function handleSubmit() {
     return;
 }
 
+function renderResult(content) {
+    const container = document.getElementById('main-container');
+    while(container.hasChildNodes()) {
+        container.removeChild(container.firstChild);
+    }
+    const users = content.users;
+    users.forEach(user => {
+        const userCard = document.createElement('div');
+        userCard.classList.add('user-card');
+
+        const name = user.name;
+        const uuid = user.uuid;
+        const fotoURL = user.foto;
+
+        const userInnerHTML = `<div class="img-container">
+            <img src="${fotoURL}" alt="${name}">
+        </div>
+        <div class="user-info">
+            <h4 class="text-overflow">${name}</h3>
+            <span class="uuid">${uuid}</span>
+        </div>
+        `;
+
+        userCard.innerHTML = userInnerHTML;
+
+        container.appendChild(userCard);
+    });
+}
+
 async function search() {
     const field = document.getElementById('search-field').value;
 
@@ -57,10 +86,9 @@ async function search() {
         .then(data => {
             if(data.success) {
                 console.log(data.content);
+                renderResult(data.content);
             }else{
                 console.log(data.error);
             }
         });
 }
-
-const posts_container = document.getElementById('posts');
