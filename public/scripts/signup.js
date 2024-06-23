@@ -3,6 +3,7 @@ function handleClick() {
     let email = document.getElementById("email").value;
     let pass = document.getElementById("password").value;
     let confPass = document.getElementById("confirmPassword").value;
+    let birthday = document.getElementById("birth").value;
 
     //Validaciones aqui ->
 
@@ -19,7 +20,8 @@ function handleClick() {
             name: name,
             email: email,
             password: pass,
-            confirmPassword: confPass
+            confirmPassword: confPass,
+            birthday: birthday
         })
     };
 

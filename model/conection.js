@@ -37,10 +37,10 @@ async function getUser(email) {
     return user;
 }
 
-async function setUser(email, password) {
+async function setUser(email, password, name, birth) {
     let {records, summary} = await driver.executeQuery(
-        'CREATE (u:User { email: $email, password: $password})',
-        { email : email, password: password},
+        'CREATE (u:User { email: $email, password: $password})-[:private]->(p:Profile {name: $name, birthday: date($birth)})',
+        { email : email, password: password, name: name, birth: birth},
         { database : 'neo4j'}
     );
 

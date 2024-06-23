@@ -4,6 +4,7 @@ const crypto = require('crypto');
 async function create(req, res) {
     const name = req.body.name;
     const email = req.body.email;
+    const birth = req.body.birthday;
     const password = req.body.password;
     const confirmPassword = req.body.confirmPassword;
 
@@ -23,7 +24,7 @@ async function create(req, res) {
 
     const hashedPassword = crypto.createHash('sha256').update(password, 'utf8').digest('hex');
 
-    if(setUser(email, hashedPassword)) {
+    if(setUser(email, hashedPassword, name, birth)) {
         return res.status(200).json({success: true});
     }else{
         return res.status(417).json({success: true, error: "Something Went Wrong"});
