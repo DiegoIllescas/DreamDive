@@ -26,7 +26,7 @@ function handleClick() {
             if(data.success) {
 
             }else{
-                
+
             }
-        })
+        });
 }
