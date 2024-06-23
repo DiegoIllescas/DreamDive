@@ -24,9 +24,9 @@ function handleClick() {
         .then(response => response.json())
         .then(data => {
             if(data.success) {
-
+                window.location.href = "http://192.168.0.18:4000/home";
             }else{
-
+                console.log(data.error);
             }
         });
 }

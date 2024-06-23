@@ -3,6 +3,9 @@ const path = require('path');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const store = new session.MemoryStore();
+const cookieParser = require('cookie-parser')
+
 
 const auth = require('./middleware/auth');
 const users = require('./middleware/user');
@@ -14,15 +17,17 @@ app.set('view engine', 'ejs');
 
 app.use(session({
     secret: 'some secret',
-    cookie: { maxAge: 60000},
+    cookie: { maxAge: 1000 * 60 * 60 * 3},
     saveUninitialized: false,
-    resave: false
+    resave: false,
+    store
 }));
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cookieParser());
 
 app.get('/', function(req, res) {
     res.render('index');
@@ -33,7 +38,13 @@ app.get('/signup', (req, res) => {
 });
 
 app.get('/home', (req, res) => {
-    res.render('home');
+    const cookie = req.cookies['connect.sid'].substring(2,34);
+    if(store.sessions[cookie]) {
+        res.render('home');
+    }else{
+        res.redirect('/');
+    } 
+
 });
 
 app.get('/identify', (req, res) => {
