@@ -21,7 +21,16 @@
     </nav>
     <main>
         <div class="header"></div>
-        <div class="posts">
+        <div class="addpost">
+            <form id="create-post" onsubmit="event.preventDefault()">
+                <label for="title">Titulo</label><br>
+                <input type="text" name="title" id="title" required><br>
+                <label for="body">Que piensas?</label><br>
+                <textarea name="body" id="body" cols="30" rows="8" required></textarea><br><br>
+            </form>
+            <button form="create-post" type="submit" onclick="handleSubmit()">Publicar</button>
+        </div>
+        <div class="posts" id="posts">
 
         </div>
     </main>

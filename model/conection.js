@@ -63,8 +63,19 @@ async function setUserPrivateID(email, uuid) {
     return (summary.updateStatistics.updates().propertiesSet > 0);
 }
 
+async function setPosts(uuid, post) {
+    let {records, summary} = await driver.executeQuery(
+        'MATCH (a:Profile) WHERE a.uuid = $uuid CREATE (a)-[:post]->(b:Poem {body: $body, title: $title}) return b',
+        {uuid : uuid, body : post.body, title : post.title},
+        { database : 'neo4j' }
+    );
+
+    return (summary.counters.updates().nodesCreated > 0);
+}
+
 module.exports = {
     getUser,
     setUser,
-    setUserPrivateID
+    setUserPrivateID,
+    setPosts
 }

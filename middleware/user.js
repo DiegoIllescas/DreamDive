@@ -32,8 +32,6 @@ async function create(req, res) {
 }
 
 async function setUUID(email, uuid) {
-    
-
     return await setUserPrivateID(email, uuid);
 }
 
