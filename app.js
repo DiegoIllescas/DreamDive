@@ -65,6 +65,15 @@ app.get('/identify', (req, res) => {
     res.render('identify');
 });
 
+app.get('/user/uuid', (req, res) => {
+    const cookie = req.cookies['connect.sid'].substring(2,34);
+    return res.status(200).json({success: true, uuid: JSON.parse(store.sessions[cookie]).user.uuid})
+});
+
+app.get('/profile/:uuid', async (req, res) => {
+    res.render('profile', {user : await users.getUserByUUID(req.params.uuid)});
+});
+
 app.post('/user/add', users.create);
 
 app.post('/login', auth.login);

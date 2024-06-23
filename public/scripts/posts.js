@@ -1,3 +1,18 @@
+const personal = document.getElementById("personal-info");
+console.log(personal);
+let uuid = "@";
+fetch("http://192.168.0.18:4000/user/uuid")
+.then(response => response.json())
+.then(data => {
+    if(data.success) {
+        uuid = data.uuid;
+        const a = document.createElement('a');
+        a.setAttribute('href', `profile/${uuid}`);
+        a.innerHTML = 'Perfil'
+        personal.appendChild(a);
+    }
+});
+
 async function handleSubmit() {
     const body = document.getElementById('body').value;
     const title = document.getElementById('title').value;

@@ -38,6 +38,25 @@ async function getUser(email) {
     return user;
 }
 
+async function getProfile(uuid) {
+    let {records, summary} = await driver.executeQuery(
+        'MATCH (p:Profile {uuid : $uuid}) RETURN p.name as name, p.foto as foto',
+        {uuid : uuid},
+        {database : 'neo4j'}
+    )
+
+    let user = null;
+
+    for(let record of records) {
+        user = {name: "", foto: "", uuid: ""};
+        user.name = record.get('name');
+        user.foto = record.get('foto');
+        user.uuid = uuid;
+    }
+
+    return user;
+}
+
 async function setUser(email, password, name, birth) {
     const date = new Date().toISOString().split('T')[0];
     const rand = Math.floor(Math.random() * 4);
@@ -141,5 +160,6 @@ module.exports = {
     setPosts,
     getRecentPosts,
     searchUsers,
-    seachPost
+    seachPost,
+    getProfile
 }
