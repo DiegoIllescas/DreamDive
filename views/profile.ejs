@@ -4,13 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DreamDive - Perfil</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    Perfil <br>
-    <%=user.name  %>
-    <br>
-    <%=user.foto  %>
-    <br>
-    <%=user.uuid  %>
+    <nav>
+        <div class="logo"></div>
+        <ul>
+            <li><a href="../home">Inicio</a></li>
+            <li>Explorar</li>
+            <li>Notificaciones</li>
+            <li>Mensajes</li>
+            <li>Guardados</li>
+            <li id="personal-info"></li>
+            <li>Más opciones</li>
+        </ul>
+        
+    </nav>
+    <main>
+        <div class="header"></div>
+        <%=user.name %>
+        <br>
+        <%=user.foto %>
+        <br>
+        <%=user.uuid %>
+    </main>
+    <footer>
+        <div class="search">
+            <form id="search" onsubmit="event.preventDefault()">
+                <input type="text" name="search-field" id="search-field" required>
+            </form>
+            <button type="submit" form="search" onclick="search()">Buscar</button>
+        </div>
+        <div class="main" id="main-container">
+        </div>
+        <div class="recomended-users"></div>
+        <div class="tendency"></div>
+        <div class="footer"></div>
+    </footer>
+    <script src="../scripts/home.js"></script>
 </body>
 </html>

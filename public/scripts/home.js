@@ -1,17 +1,26 @@
 const personal = document.getElementById("personal-info");
-console.log(personal);
 let uuid = "@";
-fetch("http://192.168.0.18:4000/user/uuid")
-.then(response => response.json())
-.then(data => {
-    if(data.success) {
-        uuid = data.uuid;
-        const a = document.createElement('a');
-        a.setAttribute('href', `profile/${uuid}`);
-        a.innerHTML = 'Perfil'
-        personal.appendChild(a);
-    }
-});
+const a = document.createElement('a');
+const url = document.URL;
+
+if(!window.location.href.includes('profile')) {
+    fetch("http://192.168.0.18:4000/user/uuid")
+    .then(response => response.json())
+    .then(data => {
+        if(data.success) {
+            uuid = data.uuid;
+            a.setAttribute('href', `profile/${uuid}`);
+            
+        }
+    });
+}else{
+    a.setAttribute('href', '#');
+}
+
+a.innerHTML = 'Perfil'
+personal.appendChild(a);
+
+
 
 async function handleSubmit() {
     const body = document.getElementById('body').value;
@@ -60,7 +69,10 @@ function renderResult(content) {
 
         const name = user.name;
         const uuid = user.uuid;
-        const fotoURL = user.foto;
+        let fotoURL = user.foto;
+        if(url.substring(0, url.lastIndexOf('/'))) {
+            fotoURL = '../' + fotoURL;
+        }
 
         const userInnerHTML = `<div class="img-container">
             <img src="${fotoURL}" alt="${name}">
@@ -100,7 +112,6 @@ async function search() {
         .then(response => response.json())
         .then(data => {
             if(data.success) {
-                console.log(data.content);
                 renderResult(data.content);
             }else{
                 console.log(data.error);

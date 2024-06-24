@@ -70,8 +70,13 @@ app.get('/user/uuid', (req, res) => {
     return res.status(200).json({success: true, uuid: JSON.parse(store.sessions[cookie]).user.uuid})
 });
 
-app.get('/profile/:uuid', async (req, res) => {
-    res.render('profile', {user : await users.getUserByUUID(req.params.uuid)});
+app.get(/^\/profile\/@.+$/, async (req, res) => {
+    const cookie = req.cookies['connect.sid'].substring(2,34);
+    if(store.sessions[cookie]) {
+        res.render('profile', {user : await users.getUserByUUID(JSON.parse(store.sessions[cookie]).user.uuid)});
+    }else{
+        res.redirect('/');
+    } 
 });
 
 app.post('/user/add', users.create);
