@@ -22,11 +22,33 @@
     </nav>
     <main>
         <div class="header"></div>
-        <%=user.name %>
-        <br>
-        <%=user.foto %>
-        <br>
-        <%=user.uuid %>
+        <div class="profile">
+            <div class="profile-background">
+                <img class="img-bkgnd-profile" src="../<%=user.background%>" alt="backgrounds">
+            </div>
+            <div class="profile-foto">
+                <div class="foto">
+                    <img class="img-profile-foto" src="../<%=user.foto %>" alt="foto">
+                </div>
+            </div>
+            <div class="edit-button">
+                <button type="button">Editar Perfil</button>
+            </div>
+            <br><br>
+            <div class="profile-details">
+                <h2><%=user.name %></h2>
+                <span class="uuid"><%=user.uuid %></span>
+                <br><br>
+                <div class="description">
+                    <h4>Descripcion</h4>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta itaque suscipit assumenda quia quas ratione omnis repellendus iure error. Laboriosam voluptate doloribus eos.</p>
+                </div>
+            </div>
+                
+            
+            
+        </div>
+        
     </main>
     <footer>
         <div class="search">

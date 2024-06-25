@@ -25,11 +25,11 @@ function handleSubmit() {
         })
     };
 
-    fetch("http://192.168.0.18:4000/user/add", options)
+    fetch("http://localhost:4000/user/add", options)
         .then(response => response.json())
         .then(data => {
             if(data.success) {
-                window.location.href = "http://192.168.0.18:4000/";
+                window.location.href = "http://localhost:4000/";
             }else{
                 console.log(data.error);
             }

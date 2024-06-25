@@ -11,6 +11,7 @@ const auth = require('./middleware/auth');
 const users = require('./middleware/user');
 const posts = require('./middleware/posts');
 const entity = require('./middleware/entity');
+const profile = require('./middleware/profile');
 
 let app = express();
 
@@ -40,16 +41,20 @@ app.get('/signup', (req, res) => {
 });
 
 app.get('/home', (req, res) => {
+    if(!req.cookies['connect.sid']) {
+        return res.redirect('/');
+    }
     const cookie = req.cookies['connect.sid'].substring(2,34);
-    if(store.sessions[cookie]) {
-        if(JSON.parse(store.sessions[cookie]).user.uuid){
-            res.render('home');
-        }else{
-            res.redirect('/final-steps');
-        }
-    }else{
-        res.redirect('/');
-    } 
+
+    if(!store.sessions[cookie]) {
+        return res.redirect('/final-steps');
+    }
+    
+    if(!JSON.parse(store.sessions[cookie]).user.uuid) {
+        return res.redirect('/final-steps');
+    }
+
+    return res.render('home');
 });
 
 app.get('/final-steps', (req, res) => {
@@ -70,10 +75,10 @@ app.get('/user/uuid', (req, res) => {
     return res.status(200).json({success: true, uuid: JSON.parse(store.sessions[cookie]).user.uuid})
 });
 
-app.get(/^\/profile\/@.+$/, async (req, res) => {
+app.get('/profile/:uuid', async (req, res) => {
     const cookie = req.cookies['connect.sid'].substring(2,34);
     if(store.sessions[cookie]) {
-        res.render('profile', {user : await users.getUserByUUID(JSON.parse(store.sessions[cookie]).user.uuid)});
+        res.render('profile', {user : await users.getUserByUUID(req.params.uuid)});
     }else{
         res.redirect('/');
     } 
@@ -90,7 +95,7 @@ app.post('/account/add', async (req, res) => {
             req.session.user.uuid = req.body.uuid;
             res.status(200).json({success: true});
         }else{
-            res.status(400).json({success : false, error: "Soething went wrong"});
+            res.status(400).json({success : false, error: "Something went wrong"});
         }
     }else{
         res.redirect('/');
@@ -109,6 +114,19 @@ app.post('/posts/add', async (req, res) => {
         res.redirect('/');
     }
 });
+
+app.post('/follow/add', async (req, res) => {
+    const cookie = req.cookies['connect.sid'].substring(2,34);
+    if(store.sessions[cookie]) {
+        if(await profile.follow(JSON.parse(store.sessions[cookie]).user.uuid, req.body)) {
+            res.status(200).json({success : true});
+        }else{
+            res.status(400).json({success: false, error: "Servicio no disponible"});
+        }
+    }else{
+        res.redirect('/');
+    }
+})
 
 app.post('/search', entity.get);
 

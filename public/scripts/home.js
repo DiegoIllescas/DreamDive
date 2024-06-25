@@ -2,20 +2,24 @@ const personal = document.getElementById("personal-info");
 let uuid = "@";
 const a = document.createElement('a');
 const url = document.URL;
-
-if(!window.location.href.includes('profile')) {
-    fetch("http://192.168.0.18:4000/user/uuid")
+ 
+ fetch("http://localhost:4000/user/uuid")
     .then(response => response.json())
     .then(data => {
         if(data.success) {
             uuid = data.uuid;
-            a.setAttribute('href', `profile/${uuid}`);
+            if(!window.location.href.includes('profile')) {
+                a.setAttribute('href', `profile/${uuid}`);
+            }else{
+                a.setAttribute('href', `../profile/${uuid}`);
+            }
+            
             
         }
     });
-}else{
+
     a.setAttribute('href', '#');
-}
+
 
 a.innerHTML = 'Perfil'
 personal.appendChild(a);
@@ -45,11 +49,11 @@ async function handleSubmit() {
         })
     };
 
-    await fetch('http://192.168.0.18:4000/posts/add', options)
+    await fetch('http://localhost:4000/posts/add', options)
         .then(response => response.json())
         .then(data => {
             if(data.success) {
-                window.location.href = "http://192.168.0.18:4000/home";
+                window.location.href = "http://localhost:4000/home";
             }else{
                 console.log(data.error);
             }
@@ -108,7 +112,7 @@ async function search() {
         })
     }
 
-    await fetch ('http://192.168.0.18:4000/search', options)
+    await fetch ('http://localhost:4000/search', options)
         .then(response => response.json())
         .then(data => {
             if(data.success) {

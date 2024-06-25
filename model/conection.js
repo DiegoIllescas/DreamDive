@@ -40,7 +40,7 @@ async function getUser(email) {
 
 async function getProfile(uuid) {
     let {records, summary} = await driver.executeQuery(
-        'MATCH (p:Profile {uuid : $uuid}) RETURN p.name as name, p.foto as foto',
+        'MATCH (p:Profile {uuid : $uuid}) RETURN p.name as name, p.foto as foto, p.background as background',
         {uuid : uuid},
         {database : 'neo4j'}
     )
@@ -51,6 +51,7 @@ async function getProfile(uuid) {
         user = {name: "", foto: "", uuid: ""};
         user.name = record.get('name');
         user.foto = record.get('foto');
+        user.background = record.get('background');
         user.uuid = uuid;
     }
 
@@ -59,7 +60,7 @@ async function getProfile(uuid) {
 
 async function setUser(email, password, name, birth) {
     const date = new Date().toISOString().split('T')[0];
-    const rand = Math.floor(Math.random() * 4);
+    const rand = Math.round(Math.random() * 4);
     let foto = "";
     switch (rand) {
         case 0:
@@ -75,9 +76,10 @@ async function setUser(email, password, name, birth) {
             foto = "imgs/redprofile.png";
             break;            
     }
+    const background = "imgs/backgrounds/default.jpg"
     let {records, summary} = await driver.executeQuery(
-        'CREATE (u:User { email: $email, password: $password})-[:private]->(p:Profile {name: $name, birthday: date($birth), created: date($date), foto: $foto})',
-        { email : email, password: password, name: name, birth: birth, date : date, foto: foto},
+        'CREATE (u:User { email: $email, password: $password})-[:private]->(p:Profile {name: $name, birthday: date($birth), created: date($date), foto: $foto, background: $background})',
+        { email : email, password: password, name: name, birth: birth, date : date, foto: foto, background: background},
         { database : 'neo4j'}
     );
 
@@ -153,6 +155,16 @@ async function seachPost(pattern) {
     return posts;
 }
 
+async function setFollow(origin, destiny) {
+    let {records, summary} = await driver.executeQuery(
+        'MATCH (p:Profile {uuid: $org}), (b:Profile {uuid : $dest}) CREATE (p)-[:follow]->(b) RETURN p',
+        { org: origin, dest: destiny },
+        { database : 'neo4j' }
+    );
+
+    return (summary.counters.updates().relationshipsCreated > 0);
+}
+
 module.exports = {
     getUser,
     setUser,
@@ -161,5 +173,6 @@ module.exports = {
     getRecentPosts,
     searchUsers,
     seachPost,
-    getProfile
+    getProfile,
+    setFollow
 }
