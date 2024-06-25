@@ -48,7 +48,7 @@ async function getProfile(uuid) {
     let user = null;
 
     for(let record of records) {
-        user = {name: "", foto: "", uuid: ""};
+        user = {name: "", foto: "", uuid: "", background: ""};
         user.name = record.get('name');
         user.foto = record.get('foto');
         user.background = record.get('background');
@@ -165,6 +165,26 @@ async function setFollow(origin, destiny) {
     return (summary.counters.updates().relationshipsCreated > 0);
 }
 
+async function setFriendRequest(origin, destiny) {
+    let {records, summary} = await driver.executeQuery(
+        'MATCH (a:Profile {uuid: $origin}), (b:Profile {uuid: $destiny}) CREATE (a)-[:friend_request]->(b)',
+        { origin: origin, destiny: destiny },
+        { database : 'neo4j' }
+    );
+
+    return (summary.counters.updates().relationshipsCreated > 0);
+}
+
+async function updateFriendRequest(destiny, origin) {
+    let {records, summary} = await driver.executeQuery(
+        'MATCH (a:Profile {uuid: $destiny})<-[r:friend_request]-(b:Profile {uuid: $origin}) DELETE r CREATE (a)<-[:friend]-(b)',
+        { destiny: destiny, origin: origin },
+        { database: 'neo4j' }
+    );
+
+    return (summary.counters.updates().relationshipsCreated > 0);
+}
+
 module.exports = {
     getUser,
     setUser,
@@ -174,5 +194,7 @@ module.exports = {
     searchUsers,
     seachPost,
     getProfile,
-    setFollow
+    setFollow,
+    setFriendRequest,
+    updateFriendRequest
 }

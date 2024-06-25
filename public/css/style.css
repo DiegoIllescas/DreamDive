@@ -1,12 +1,141 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
+:root {
+    --primary: #FCFCFC;
+    --secondary: #030303;
+    --tertiary: #637df0;
+}
+
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
 body{
     font-family: 'Inter';
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    background-color: #91a5ff;
 }
 
 main {
-    flex: 1 0 auto
+    min-height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+
+.card {
+    width: 60vw;
+    display: flex;
+    padding: 1vh;
+    border-radius: 15px;
+    background-color: var(--primary);
+}
+
+.left {
+    width: 50%;
+}
+
+.right {
+    display: block;
+    padding: 2vw;
+    width: 50%;
+}
+
+.create-account {
+    text-align: end;
+}
+
+.create-account > a:visited {
+    color: black;
+}
+
+.btn{
+    font-size: 20px;
+    display: block;
+    font-weight: 500;
+    text-decoration: none;
+    width: 67%;
+    padding: 4px 0;
+    text-align: center;
+    background-color: var(--tertiary);
+    color: var(--primary);
+    border-radius: 5px;
+    border: 0px solid
+}
+
+.btn:hover {
+    cursor: pointer;
+    background-color: #3a5cf0;
+}
+
+.btn-secondary {
+    font-weight: 150;
+    text-decoration: none;
+    padding: 2px 8px;
+    border-radius: 5px;
+    border: 1px solid;
+    border-color: rgb(148, 148, 148);
+}
+
+.btn-secondary:hover {
+    background-color: #e6e6e6;
+}
+.create-account > span{
+    font-weight: 150;
+}
+
+.btn-google{
+    display: flex;
+    gap: 16px;
+    border-radius: 5px;
+    border: 2px solid;
+    border-color: #CACACA;
+}
+
+.btn-google:hover {
+    background-color: #e6e6e6;
+    cursor: pointer;
+}
+
+.btn-google > span{
+    margin: auto 0;
+    color: #8f8f8f;
+    font-weight: 500;
+}
+
+.right > h1{
+    letter-spacing: 2px;
+    font-weight: 400;
+}
+
+.right > p{
+    font-weight: 200;
+}
+
+label {
+    padding: 8px 0;
+}
+
+.input-text {
+    width: 100%;
+    border-radius: 5px;
+    padding: 8px 2px;
+    border: 1px solid rgb(202, 202, 202);
+    font-size: 16px;
+}
+
+input:focus {
+    border-color: var(--tertiary);
+}
+
+hr {
+    border: 0.1px solid #CACACA;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
 }
