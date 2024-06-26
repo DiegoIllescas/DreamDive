@@ -57,7 +57,7 @@ main {
     display: block;
     font-weight: 500;
     text-decoration: none;
-    width: 67%;
+    width: 100%;
     padding: 4px 0;
     text-align: center;
     background-color: var(--tertiary);
@@ -69,6 +69,10 @@ main {
 .btn:hover {
     cursor: pointer;
     background-color: #3a5cf0;
+}
+
+.required {
+    color: red;
 }
 
 .btn-secondary {
