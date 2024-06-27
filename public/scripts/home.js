@@ -12,14 +12,28 @@ const url = document.URL;
                 a.setAttribute('href', `profile/${uuid}`);
             }else{
                 a.setAttribute('href', `../profile/${uuid}`);
+                if(!(uuid == window.location.pathname.split('/').pop())) {
+                    const editProfile = document.getElementById('edit');
+                    editProfile.style.visibility = 'hidden';
+                }
             }
-            
-            
         }
     });
 
-    a.setAttribute('href', '#');
 
+async function getFollowers() {
+    const num = document.getElementById('num_followers');
+
+    const uuid = window.location.pathname.split('/').pop();
+    await fetch(`http://localhost:4000/followers/${uuid}`).then(response => response.json()).then(data => {
+        if(!data.success) {
+            num.innerHTML = "0";
+        }else {
+            num.innerHTML = data.count.low;
+        }
+    });
+    console.log('llegue aqui');
+}
 
 a.innerHTML = "<span class='material-symbols-outlined'>person</span><p>Perfil</p>"
 personal.appendChild(a);
@@ -79,7 +93,7 @@ function renderResult(content) {
         }
 
         const userInnerHTML = `<div class="img-container">
-            <img src="${fotoURL}" alt="${name}">
+            <img src="${fotoURL}" alt="${name}" width="64px" height="64px">
         </div>
         <div class="user-info">
             <h4 class="text-overflow">${name}</h3>
@@ -91,6 +105,9 @@ function renderResult(content) {
 
         container.appendChild(userCard);
     });
+
+    const posts = content.posts;
+    renderPost(posts);
 }
 
 async function search() {
@@ -141,5 +158,75 @@ function closeSession() {
         }else{
             console.log('Error al cerrar sesion');
         }
+    });
+}
+
+async function getPost() {
+    const posts = document.getElementById('posts');
+
+    const uuid = window.location.pathname.split('/').pop();
+    await fetch(`http://localhost:4000/post/${uuid}`).then(response => response.json()).then(data => {
+        if(!data.success) {
+            posts.innerHTML = "0";
+        }else {
+            console.log(data.posts);
+            const postsToRender = data.posts;
+            renderPost(postsToRender);
+        }
+    });
+}
+
+async function getFeed() {
+    await fetch(`http://localhost:4000/post/foryou`).then(response => response.json()).then(data => {
+        if(!data.success) {
+            posts.innerHTML = "0";
+        }else {
+            console.log(data.posts);
+            const postsToRender = data.posts;
+            renderPost(postsToRender);
+        }
+    });
+}
+
+function renderPost(posts) {
+    const container = document.getElementById('posts');
+
+    posts.forEach((post) => {
+        const postContainer = document.createElement('div');
+        postContainer.classList.add('post');
+
+        const profileURL = '../'+ post.foto;
+        const autor = post.autor;
+        const message = post.message;
+        const title = post.title;
+        const bodywithout = post.body;
+        const id = post.id;
+
+        const body = bodywithout.replace(/\n/g, "<br>");
+
+        const postInnerHTML = `<div class="post-header">
+            <div class="autor-foto">
+                <img src="${profileURL}" alt="autor">
+            </div>
+            <div class="autor">
+                <span class="name">${autor}</span>
+                <spam class="uuid">${post.uuid}</span>
+            </div>
+        </div>
+        <div class="post-message">
+            <p>${message}</p>
+        </div>
+        <div class="poem">
+            <h3>${title}</h3><br>
+            <p>${body}</p>
+         </div>
+        <div class="interact">
+            <a><span class="material-symbols-outlined">chat_bubble</span></a>
+            <a><span class="material-symbols-outlined">favorite</span></a>
+            <a><span class="material-symbols-outlined">bookmark</span></a>
+        </div>`;
+
+        postContainer.innerHTML = postInnerHTML;
+        container.appendChild(postContainer);
     });
 }

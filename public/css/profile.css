@@ -1,0 +1,148 @@
+.profile {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-background {
+    width: 100%;
+    height: 25vh;
+    overflow: hidden;
+}
+
+.profile-background > img {
+    width: 100%;
+}
+
+.profile {
+    display: flex;
+    color: var(--primary);
+    gap: 16px;
+}
+
+.img-profile-foto {
+    position: relative;
+    left: 64px;
+    top: -80px;
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+}
+
+.foto {
+    height: 0;
+}
+
+.edit-button {
+    display: flex;
+    padding: 0 16px 0 0;
+    justify-content: end;
+}
+
+.profile-details {
+    padding: 0 64px;
+}
+
+.edit-btn {
+    font-size: 16px;
+    display: block;
+    width: 200px;
+    background-color: var(--tertiary);
+    color: var(--primary);
+    padding: 8px 0;
+    border-radius: 10px;
+    border: 1px solid var(--tertiary);
+}
+
+.edit-btn:hover {
+    background-color: #4767f5;
+    cursor: pointer;
+}
+
+.time {
+    display: flex;
+    color: #acacac;
+}
+
+.time > p {
+    margin: auto 0 auto 8px;
+
+}
+
+.description > p{
+    color: #acacac;   
+}
+
+.followers {
+    display: flex;
+    justify-content: center;
+}
+
+#num_followers {
+    color: #acacac;
+    margin-left: 8px;
+}
+
+#posts {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.post-header {
+    padding: 0 0 0 16px;
+    display: flex;
+    gap: 16px;
+}
+
+.autor-foto > img {
+    width: 64px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+}
+
+.autor {
+    margin: auto 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.name {
+    color: var(--primary);
+    font-size: 18px;
+}
+
+.uuid {
+    color: #acacac;
+}
+
+.post-message {
+    color: var(--primary);
+    padding-left: 96px;
+}
+
+.poem {
+    margin-top: 16px;
+    margin-left: 96px;
+    margin-right: 16px;
+    padding: 24px 16px;
+    text-align: center;
+    border-radius: 15px;
+    border: 1px solid #4767f5;
+    color: var(--primary);
+}
+
+.interact {
+    margin-left: 96px;
+    margin-right: 16px;
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-around;
+    color: var(--primary);
+}

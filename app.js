@@ -79,6 +79,32 @@ app.get('/identify', (req, res) => {
     res.render('identify');
 });
 
+app.get('/explore', (req, res) => {
+    if(!req.cookies['connect.sid']) {
+        return res.redirect('/');
+    }
+
+    const cookie = req.cookies['connect.sid'].substring(2,34);
+    if(!store.sessions[cookie]) {
+        return res.redirect('/');
+    }
+
+    return res.render('explore');
+});
+
+app.get('/public', (req, res) => {
+    if(!req.cookies['connect.sid']) {
+        return res.redirect('/');
+    }
+
+    const cookie = req.cookies['connect.sid'].substring(2,34);
+    if(!store.sessions[cookie]) {
+        return res.redirect('/');
+    }
+
+    return res.render('public');
+});
+
 app.get('/user/uuid', (req, res) => {
     if(!req.cookies['connect.sid']) {
         return res.redirect('/');
@@ -103,6 +129,35 @@ app.get('/profile/:uuid', async (req, res) => {
 });
 
 app.get('/sugerence', posts.getSugerence);
+
+app.get('/followers/:uuid', async (req, res) => {
+    const num = await profile.numFollowers(req.params.uuid);
+
+    res.status(200).json({success: true, count: num});
+});
+
+app.get('/post/:uuid', async (req, res) => {
+    const posts = await profile.getPosts(req.params.uuid);
+
+    res.status(200).json({success: true, posts: posts});
+});
+
+app.get('/post/foryou', async (req, res) => {
+    if(!req.cookies['connect.sid']) {
+        return res.redirect('/');
+    }
+
+    const cookie = req.cookies['connect.sid'].substring(2,34);
+    if(!store.sessions[cookie]) {
+        return res.redirect('/');
+    }
+
+    console.log(JSON.parse(store.sessions[cookie]).user.uuid);
+
+    let posts = await profile.getFeed(JSON.parse(store.sessions[cookie]).user.uuid)
+
+    return res.status(200).json({success: true, posts: posts})
+});
 
 app.post('/user/add', users.create);
 

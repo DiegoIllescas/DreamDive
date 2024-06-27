@@ -40,7 +40,7 @@ async function getUser(email) {
 
 async function getProfile(uuid) {
     let {records, summary} = await driver.executeQuery(
-        'MATCH (p:Profile {uuid : $uuid}) RETURN p.name as name, p.foto as foto, p.background as background',
+        'MATCH (p:Profile {uuid : $uuid}) RETURN p.name as name, p.foto as foto, p.background as background, p.created as created, p.description as description',
         {uuid : uuid},
         {database : 'neo4j'}
     )
@@ -48,14 +48,26 @@ async function getProfile(uuid) {
     let user = null;
 
     for(let record of records) {
-        user = {name: "", foto: "", uuid: "", background: ""};
+        user = {name: "", foto: "", uuid: "", background: "", created: "", description: ""};
         user.name = record.get('name');
         user.foto = record.get('foto');
         user.background = record.get('background');
+        user.created = formatDate(record.get('created'));
+        user.description = record.get('description') ? record.get('description') : null;
         user.uuid = uuid;
     }
 
     return user;
+}
+
+function formatDate(dataString) {
+    const date = new Date(dataString);
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+
+    return `${day}/${month}/${year}`;
 }
 
 async function setUser(email, password, name, birth) {
@@ -138,7 +150,7 @@ async function searchUsers(pattern) {
 
 async function seachPost(pattern) {
     let {records, summary} = await driver.executeQuery(
-        'MATCH (a:Poem) WHERE a.title CONTAINS $pattern OR a.body CONTAINS $pattern return a ORDER BY a.created LIMIT 10',
+        'MATCH (a:Poem)<-[:post]-(b:Profile) WHERE a.title CONTAINS $pattern OR a.body CONTAINS $pattern OR a.message CONTAINS $pattern return id(a) as id, a, b ORDER BY a.created LIMIT 10',
         { pattern: pattern },
         { database : 'neo4j' }
     );
@@ -147,8 +159,13 @@ async function seachPost(pattern) {
 
     for(let record of records) {
         let postFound = {};
+        postFound.id = record.get('id');
         postFound.title = record.get('a').properties.title;
+        postFound.message = record.get('a').properties.message;
         postFound.body = record.get('a').properties.body;
+        postFound.autor = record.get('b').properties.name;
+        postFound.foto = record.get('b').properties.foto;
+        postFound.uuid = record.get('b').properties.uuid;
         posts.push(postFound);
     }
 
@@ -231,6 +248,90 @@ async function getPosts() {
     return posts;
 }
 
+async function countFollowers(uuid) {
+    let {records, summary} = await driver.executeQuery(
+        'MATCH (p:Profile {uuid: $uuid})<-[r:follow]-(p2:Profile) return count(r) as num',
+        { uuid : uuid},
+        { database : 'neo4j'}
+    );
+
+    let num = 0;
+
+    for(let record of records) {
+        num = record.get('num') ? record.get('num') : 0;
+    }
+
+    return num;
+}
+
+async function getProfilePost(uuid) {
+    let {records, summary} = await driver.executeQuery(
+        'MATCH (p:Profile {uuid: $uuid})-[:post]->(a:Poem) return id(a) as id, a.title as title, a.body as body, a.message as message, p.name as autor, p.uuid as uuid, p.foto as foto ORDER BY p.created LIMIT 15',
+        { uuid : uuid },
+        { database : 'neo4j' }
+    );
+
+    let posts = [];
+
+    for(let record of records) {
+        let post = {
+            id: 0,
+            autor: "",
+            uuid: "",
+            foto: "",
+            message: "",
+            title: "",
+            body: ""
+        }
+
+        post.id = record.get('id').low;
+        post.autor = record.get('autor');
+        post.uuid = record.get('uuid');
+        post.foto = record.get('foto');
+        post.message = record.get('message');
+        post.title = record.get('title');
+        post.body = record.get('body')
+
+        posts.push(post);
+    }
+    return posts;
+}
+
+async function getFeedbyUUID(uuid) {
+    let {records, summary} = await driver.executeQuery(
+        'MATCH (p2:Profile {uuid: $uuid})-[:follow]->(a:Profile)-[:post]->(p:Poem) return id(p) as id, p.title as title, p.body as body, p.message as message, a.name as autor, a.uuid as uuid, a.foto as foto ORDER BY p.created LIMIT 15',
+        { uuid : uuid },
+        { database : 'neo4j' }
+    );
+    console.log(uuid);
+
+    let posts = [];
+
+    for(let record of records) {
+        let post = {
+            id: 0,
+            autor: "",
+            uuid: "",
+            foto: "",
+            message: "",
+            title: "",
+            body: ""
+        }
+
+        post.id = record.get('id').low;
+        post.autor = record.get('autor');
+        post.uuid = record.get('uuid');
+        post.foto = record.get('foto');
+        post.message = record.get('message');
+        post.title = record.get('title');
+        post.body = record.get('body')
+
+        posts.push(post);
+    }
+
+    return posts;
+}
+
 module.exports = {
     getUser,
     setUser,
@@ -244,5 +345,8 @@ module.exports = {
     setFriendRequest,
     updateFriendRequest,
     deleteFriendRequest,
-    getPosts
+    getPosts,
+    countFollowers,
+    getProfilePost, 
+    getFeedbyUUID
 }

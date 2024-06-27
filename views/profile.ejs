@@ -4,24 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DreamDive - Perfil</title>
-    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="icon" href="../logo.png" type="image/png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/profile.css">
 </head>
 <body>
     <nav>
-        <div class="logo"></div>
-        <ul>
-            <li><a href="../home">Inicio</a></li>
-            <li>Explorar</li>
-            <li>Notificaciones</li>
-            <li>Mensajes</li>
-            <li>Guardados</li>
-            <li id="personal-info"></li>
-            <li>Más opciones</li>
-        </ul>
-        
+        <div class="header-logo">
+            <div class="logo">
+                <img src="../logo.png" alt="Logo" width="60px" height="60px">
+            </div>
+            <h2>DreamDive</h2>
+        </div>
+        <div class="navigation">
+            <ul>
+                <li><a href="../home"><span class="material-symbols-outlined">home</span><p>Inicio</p></a></li>
+                <li><a href="../explore"><span class="material-symbols-outlined">search</span><p>Explorar</p></a></li>
+                <li><a href="../notifications"><span class="material-symbols-outlined">notifications</span><p>Notificaciones</p></a></li>
+                <li><a href="../messages"><span class="material-symbols-outlined">mail</span><p>Mensajes</p></a></li>
+                <li><a href="../saved"><span class="material-symbols-outlined">bookmark</span><p>Guardados</p></a></li>
+                <li id="personal-info"></li>
+                <li><a href="../calendar"><span class="material-symbols-outlined">calendar_month</span><p>Calendario</p></a></li>
+                <li><a href="../config"><span class="material-symbols-outlined">settings</span><p>Más opciones</p></a></li>
+                <li><a href="../public" class="primary"><span class="material-symbols-outlined">ink_pen</span><p>Publicar</p></a></li>
+            </ul>
+        </div>
+        <div class="navigation nav-bottom">
+            <ul>
+                <li><a class="exit" onclick="closeSession()"><span class="material-symbols-outlined">logout</span><p>Cerrar sesión</p></a></li>
+            </ul>
+        </div>
     </nav>
     <main>
-        <div class="header"></div>
         <div class="profile">
             <div class="profile-background">
                 <img class="img-bkgnd-profile" src="../<%=user.background%>" alt="backgrounds">
@@ -32,37 +47,56 @@
                 </div>
             </div>
             <div class="edit-button">
-                <button type="button">Editar Perfil</button>
+                <button type="button" class="edit-btn" id="edit">Editar Perfil</button>
             </div>
-            <br><br>
             <div class="profile-details">
                 <h2><%=user.name %></h2>
                 <span class="uuid"><%=user.uuid %></span>
                 <br><br>
+                <div class="time">
+                    <span class="material-symbols-outlined">calendar_month</span>
+                    <p>Se unio desde <%=user.created%></p>
+                </div>
+                <br>
                 <div class="description">
-                    <h4>Descripcion</h4>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta itaque suscipit assumenda quia quas ratione omnis repellendus iure error. Laboriosam voluptate doloribus eos.</p>
+                    <h3>Biografía</h3><br>
+                    <% if(user.description) { %>
+                        <p><%=user.description %></p>
+                    <% } else { %>
+                        <p>Escribe tu biografía aquí</p>
+                    <% } %>
+                </div>
+                <br>
+                <div class="followers">
+                    <p>Seguidores: </p>
+                    <span id="num_followers"></span>
                 </div>
             </div>
-                
-            
-            
+            <hr>
+            <div id="posts">
+
+            </div>
         </div>
-        
     </main>
     <footer>
-        <div class="search">
-            <form id="search" onsubmit="event.preventDefault()">
-                <input type="text" name="search-field" id="search-field" required>
-            </form>
-            <button type="submit" form="search" onclick="search()">Buscar</button>
+        <div class="header-footer">
+            
         </div>
-        <div class="main" id="main-container">
+        <div class="footer-container">
+            <div class="event-card">
+
+            </div>
+            <div class="compendium">
+
+            </div>
         </div>
-        <div class="recomended-users"></div>
-        <div class="tendency"></div>
         <div class="footer"></div>
     </footer>
-    <script src="../scripts/home.js"></script>
+    <script src="../scripts/home.js">
+    </script>
+    <script>
+        getFollowers();
+        getPost();
+    </script>
 </body>
 </html>
