@@ -185,6 +185,52 @@ async function updateFriendRequest(destiny, origin) {
     return (summary.counters.updates().relationshipsCreated > 0);
 }
 
+async function deleteFriendRequest(destiny, origin) {
+    let {records, summary} = await driver.executeQuery(
+        'MATCH (a:Profile {uuid: $destiny})<-[r:friend_request]-(b:Profile {uuid: $origin}) DELETE r',
+        { destiny: destiny, origin: origin },
+        { database: 'neo4j' }
+    );
+
+    return (summary.counters.updates().relationshipsDeleted > 0);
+}
+
+async function getPosts() {
+    let {records, summary} = await driver.executeQuery(
+        'MATCH (p:Poem)<-[:post]-(a:Profile) RETURN id(p) as id, p.title as title, p.body as body, p.message as message, a.name as autor, a.uuid as uuid, a.foto as foto ORDER BY p.created LIMIT 15',
+        {},
+        { database: 'neo4j' }
+    );
+
+    let posts = [];
+
+    for(let record of records) {
+        let post = {
+            id: 0,
+            autor: "",
+            uuid: "",
+            foto: "",
+            message: "",
+            title: "",
+            body: ""
+        }
+
+        post.id = record.get('id');
+        post.autor = record.get('autor');
+        post.uuid = record.get('uuid');
+        post.foto = record.get('foto');
+        post.message = record.get('message');
+        post.title = record.get('title');
+        post.body = record.get('body')
+
+        posts.push(post);
+    }
+
+    console.log(posts);
+
+    return posts;
+}
+
 module.exports = {
     getUser,
     setUser,
@@ -196,5 +242,7 @@ module.exports = {
     getProfile,
     setFollow,
     setFriendRequest,
-    updateFriendRequest
+    updateFriendRequest,
+    deleteFriendRequest,
+    getPosts
 }

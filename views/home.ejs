@@ -5,47 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DreamDive - Inicio</title>
     <link rel="icon" href="logo.png" type="image/png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
     <nav>
-        <div class="logo"></div>
-        <ul>
-            <li><a href="#">Inicio</a></li>
-            <li>Explorar</li>
-            <li>Notificaciones</li>
-            <li>Mensajes</li>
-            <li>Guardados</li>
-            <li id="personal-info"></li>
-            <li>Más opciones</li>
-        </ul>
-        
+        <div class="header-logo">
+            <div class="logo">
+                <img src="logo.png" alt="Logo" width="60px" height="60px">
+            </div>
+            <h2>DreamDive</h2>
+        </div>
+        <div class="navigation">
+            <ul>
+                <li><a><span class="material-symbols-outlined">home</span><p>Inicio</p></a></li>
+                <li><a href="explore"><span class="material-symbols-outlined">search</span><p>Explorar</p></a></li>
+                <li><a href="notifications"><span class="material-symbols-outlined">notifications</span><p>Notificaciones</p></a></li>
+                <li><a href="messages"><span class="material-symbols-outlined">mail</span><p>Mensajes</p></a></li>
+                <li><a href="saved"><span class="material-symbols-outlined">bookmark</span><p>Guardados</p></a></li>
+                <li id="personal-info"></li>
+                <li><a href="calendar"><span class="material-symbols-outlined">calendar_month</span><p>Calendario</p></a></li>
+                <li><a href="config"><span class="material-symbols-outlined">settings</span><p>Más opciones</p></a></li>
+                <li><a href="public" class="primary"><span class="material-symbols-outlined">ink_pen</span><p>Publicar</p></a></li>
+            </ul>
+        </div>
+        <div class="navigation nav-bottom">
+            <ul>
+                <li><a class="exit" onclick="closeSession()"><span class="material-symbols-outlined">logout</span><p>Cerrar sesión</p></a></li>
+            </ul>
+        </div>
     </nav>
     <main>
-        <div class="header"></div>
-        <div class="addpost">
-            <form id="create-post" onsubmit="event.preventDefault()">
+        <div class="header">
+            <a class="nav-selector nav-active" id="for-you">Para ti</a>
+            <a class="nav-selector" id="sugerence">Sugerencias</a>
+        </div>
+        <div class="for-you">
+            <div id="posts-for-you">
+
+            </div>
+        </div>
+        <div class="sugerence">
+            <div id="posts-sugerence">
+
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="header-footer">
+            Destacados
+        </div>
+        <div class="footer-container">
+            <div class="event-card">
+
+            </div>
+            <div class="compendium">
+
+            </div>
+        </div>
+        <div class="footer"></div>
+    </footer>
+    <script src="scripts/home.js"></script>
+</body>
+</html>
+
+<!--
+<form id="create-post" onsubmit="event.preventDefault()">
                 <label for="title">Titulo</label><br>
                 <input type="text" name="title" id="title" required><br>
                 <label for="body">Que piensas?</label><br>
                 <textarea name="body" id="body" cols="30" rows="8" required></textarea><br><br>
             </form>
             <button form="create-post" type="submit" onclick="handleSubmit()">Publicar</button>
-        </div>
-        
-    </main>
-    <footer>
-        <div class="search">
-            <form id="search" onsubmit="event.preventDefault()">
-                <input type="text" name="search-field" id="search-field" required>
-            </form>
-            <button type="submit" form="search" onclick="search()">Buscar</button>
-        </div>
-        <div class="main" id="main-container">
-        </div>
-        <div class="recomended-users"></div>
-        <div class="tendency"></div>
-        <div class="footer"></div>
-    </footer>
-    <script src="scripts/home.js"></script>
-</body>
-</html>
+-->

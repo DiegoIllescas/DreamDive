@@ -13,7 +13,6 @@ const users = require('./middleware/user');
 const posts = require('./middleware/posts');
 const entity = require('./middleware/entity');
 const profile = require('./middleware/profile');
-const { error } = require('console');
 
 let app = express();
 
@@ -103,6 +102,8 @@ app.get('/profile/:uuid', async (req, res) => {
     return res.render('profile', {user : await users.getUserByUUID(req.params.uuid)});
 });
 
+app.get('/sugerence', posts.getSugerence);
+
 app.post('/user/add', users.create);
 
 app.post('/login', auth.login);
@@ -176,6 +177,8 @@ app.post('/friendship/send', async (req, res) => {
     return res.status(200).json({success: true});
 });
 
+app.post('/search', entity.get);
+
 app.put('/friendship/accept', async (req, res) => {
     if(!req.cookies['connect.sid']) {
         return res.redirect('/');
@@ -191,9 +194,32 @@ app.put('/friendship/accept', async (req, res) => {
     }
 
     return res.status(200).json({success: true});
-})
+});
 
-app.post('/search', entity.get);
+app.put('/friendship/decline', async (req, res) => {
+    if(!req.cookies['connect.sid']) {
+        return res.redirect('/');
+    }
+
+    const cookie = req.cookies['connect.sid'].substring(2,34);
+    if(!store.sessions[cookie]) {
+        return res.redirect('/');
+    }
+
+    if(! await profile.declineFriendRequest(JSON.parse(store.sessions[cookie]).user.uuid, req.body)) {
+        return res.status(400).json({ success: false , error : "Algo salio mal"});
+    }
+
+    return res.status(200).json({success: true});
+});
+
+app.delete('/sesion', (req, res) => {
+    req.session.destroy((err) => {
+        if(!err) {
+            return res.status(200).json({success: true});
+        }
+    });
+});
 
 app.listen(4000);
 

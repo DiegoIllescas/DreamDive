@@ -1,4 +1,4 @@
-const { setFollow, setFriendRequest, updateFriendRequest } = require('../model/conection');
+const { setFollow, setFriendRequest, updateFriendRequest, deleteFriendRequest } = require('../model/conection');
 
 async function follow(uuid, body) {
     return await setFollow(uuid, body.uuid);
@@ -12,6 +12,10 @@ async function acceptFriendRequest(uuid, body) {
     return await updateFriendRequest(uuid, body.uuid);
 }
 
+async function declineFriendRequest(uuid, body) {
+    return await deleteFriendRequest(uuid, body.uuid);
+}
+
 module.exports = {
-    follow, sendFriendRequest, acceptFriendRequest
+    follow, sendFriendRequest, acceptFriendRequest, declineFriendRequest
 }

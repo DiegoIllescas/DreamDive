@@ -21,7 +21,7 @@ const url = document.URL;
     a.setAttribute('href', '#');
 
 
-a.innerHTML = 'Perfil'
+a.innerHTML = "<span class='material-symbols-outlined'>person</span><p>Perfil</p>"
 personal.appendChild(a);
 
 
@@ -121,4 +121,25 @@ async function search() {
                 console.log(data.error);
             }
         });
+}
+
+function closeSession() {
+    const options = {
+        method: 'DELETE',
+        mode: 'cors',
+        credentials: 'same-origin',
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }
+
+    fetch('http://localhost:4000/sesion', options)
+    .then(response => response.json())
+    .then(data => {
+        if(data.success) {
+            window.location.href = "http://localhost:4000/";   
+        }else{
+            console.log('Error al cerrar sesion');
+        }
+    });
 }

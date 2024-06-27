@@ -1,0 +1,155 @@
+:root {
+    --primary: #FCFCFC;
+    --secondary: #030303;
+    --tertiary: #637df0;
+}
+
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    font-family: 'Inter';
+    min-height: 100vh;
+    background-color: #02162E;
+}
+
+nav{
+    display: flex;
+    flex-direction: column;
+    width: 28%;
+    border-right: 1px solid #cfcfcf;
+}
+
+.header-logo {
+    display: flex;
+    padding: 1vh 0 1vh 8vw;
+    gap: 16px;
+}
+
+.header-logo > h2 {
+    color: var(--primary);
+    font-weight: 500;
+    margin: auto 0;
+    font-size: 30px;
+    letter-spacing: 2px;
+}
+
+.navigation {
+    display: flex;
+    padding: 16px 0 16px 8vw;
+}
+
+.navigation > ul {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    position: sticky;
+    margin: 0;
+    padding: 0 16px 0 0;
+    gap: 8px;
+}
+
+ul > li {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+li > a{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    text-decoration: none;
+    padding: 16px 0;
+    border-radius: 15px;
+    border: 1px solid #4767f5;
+    color: var(--primary);
+}
+
+li > a:hover {    
+    background-color: #030a13;
+    cursor: pointer;
+}
+
+a > p {
+    margin: auto 0;
+    margin-left: 8px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    width: 44%;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+}
+
+.nav-selector {
+    display: block;
+    width: 50%;
+    text-align: center;
+    padding: 2vh 0;
+    font-size: 24px;
+    font-weight: 250;
+    color: var(--primary);
+}
+
+.nav-selector:hover {
+    background-color: #030a13;
+    cursor: pointer;
+}
+
+.nav-active {
+    border-bottom: 3px solid var(--tertiary);
+}
+
+.nav-bottom{
+    margin-top: auto;
+}
+
+.primary {
+    color: var(--primary);
+    background-color: var(--tertiary);
+}
+
+.primary:hover {
+    color: var(--primary);
+    background-color: #4767f5;
+}
+
+.exit:hover {
+    background-color: #ff9a95;
+    border-color: #ff9a95;
+}
+
+footer{
+    display: flex;
+    flex-direction: column;
+    width: 28%;
+    border-left: 1px solid #cfcfcf;
+}
+
+.header-footer {
+    padding: 1vh 8vw 1vh 16px;
+    font-weight: 200;
+    color: var(--primary);
+    font-size: 24px;
+}
+
+.footer-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 16px 8vw 1vh 16px;
+}
