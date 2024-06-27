@@ -229,23 +229,28 @@ async function getPosts() {
             foto: "",
             message: "",
             title: "",
-            body: ""
+            body: "",
+            likes: 0
         }
 
         post.id = record.get('id');
         post.autor = record.get('autor');
         post.uuid = record.get('uuid');
         post.foto = record.get('foto');
-        post.message = record.get('message');
+        post.message = record.get('message') ? record.get('message') : '';
         post.title = record.get('title');
-        post.body = record.get('body')
-
+        post.body = record.get('body');
+        post.likes = await getLikes(post.id.low);
         posts.push(post);
     }
 
-    console.log(posts);
+    //console.log(posts);
 
     return posts;
+}
+
+async function getLikes(id) {
+    return 45;
 }
 
 async function countFollowers(uuid) {

@@ -4,9 +4,8 @@ async function create(uuid, body) {
     return await setPosts(uuid, body);
 }
 
-async function getSugerence(req, res) {
+async function getSugerence() {
     let posts = await getPosts();
-
     return posts;
 }
 
