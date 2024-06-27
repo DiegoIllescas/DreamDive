@@ -17,10 +17,11 @@ body{
 }
 
 nav{
+    position: sticky;
+    max-height: 100vh;
     display: flex;
     flex-direction: column;
     width: 28%;
-    border-right: 1px solid #cfcfcf;
 }
 
 .header-logo {
@@ -128,8 +129,8 @@ main {
 }
 
 .exit:hover {
-    background-color: #ff9a95;
-    border-color: #ff9a95;
+    background-color: #af3832;
+    border-color: #af3832;
 }
 
 footer{
@@ -159,6 +160,8 @@ footer{
 
 .create-post {
     margin: 16px;
+    padding: 36px;
+    gap: 8px;
 }
 
 label {
@@ -208,5 +211,4 @@ input {
     font-size: 18px;
     letter-spacing: 1px;
     border: 1px solid var(--tertiary);
-
 }

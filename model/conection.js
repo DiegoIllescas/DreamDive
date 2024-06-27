@@ -4,9 +4,9 @@ require('dotenv').config();
 let driver;
 
 (async () => {
-    const URI = 'neo4j://localhost';
-    const USER = 'neo4j';
-    const PASSWORD = process.env.DB_PASSWORD;
+    const URI = process.env.NEO4J_URI;
+    const USER = process.env.NEO4J_USERNAME;
+    const PASSWORD = process.env.NEO4J_PASSWORD;
 
     try{
         driver = neo4j.driver(URI, neo4j.auth.basic(USER, PASSWORD));
