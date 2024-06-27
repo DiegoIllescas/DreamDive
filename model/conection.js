@@ -229,8 +229,7 @@ async function getPosts() {
             foto: "",
             message: "",
             title: "",
-            body: "",
-            likes: 0
+            body: ""
         }
 
         post.id = record.get('id');
