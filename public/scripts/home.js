@@ -43,9 +43,10 @@ personal.appendChild(a);
 async function handleSubmit() {
     const body = document.getElementById('body').value;
     const title = document.getElementById('title').value;
+    const message = document.getElementById('message').value;
     //Validaciones ->
 
-    if(!(body && title)) {
+    if(!(body && title && message)) {
         return;
     }
 
@@ -59,7 +60,8 @@ async function handleSubmit() {
         },
         body: JSON.stringify({
             body: body,
-            title: title
+            title: title,
+            message: message
         })
     };
 
@@ -84,6 +86,7 @@ function renderResult(content) {
     users.forEach(user => {
         const userCard = document.createElement('div');
         userCard.classList.add('user-card');
+        
 
         const name = user.name;
         const uuid = user.uuid;
@@ -91,6 +94,13 @@ function renderResult(content) {
         if(url.substring(0, url.lastIndexOf('/'))) {
             fotoURL = '../' + fotoURL;
         }
+
+        userCard.id = `${uuid}`;
+        userCard.addEventListener('click', (event) => {
+            const target = event.target.id;
+            window.location.href = `http://localhost:4000/profile/${target}`;
+            console.log(target);
+        });
 
         const userInnerHTML = `<div class="img-container">
             <img src="${fotoURL}" alt="${name}" width="64px" height="64px">
@@ -177,7 +187,7 @@ async function getPost() {
 }
 
 async function getFeed() {
-    await fetch(`http://localhost:4000/post/foryou`).then(response => response.json()).then(data => {
+    await fetch(`http://localhost:4000/post`).then(response => response.json()).then(data => {
         if(!data.success) {
             posts.innerHTML = "0";
         }else {
@@ -190,6 +200,9 @@ async function getFeed() {
 
 function renderPost(posts) {
     const container = document.getElementById('posts');
+    while(container.hasChildNodes()) {
+        container.removeChild(container.firstChild);
+    }
 
     posts.forEach((post) => {
         const postContainer = document.createElement('div');

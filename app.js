@@ -105,6 +105,72 @@ app.get('/public', (req, res) => {
     return res.render('public');
 });
 
+app.get('/saved', (req, res) => {
+    if(!req.cookies['connect.sid']) {
+        return res.redirect('/');
+    }
+
+    const cookie = req.cookies['connect.sid'].substring(2,34);
+    if(!store.sessions[cookie]) {
+        return res.redirect('/');
+    }
+
+    return res.render('saved');
+});
+
+app.get('/messages', (req, res) => {
+    if(!req.cookies['connect.sid']) {
+        return res.redirect('/');
+    }
+
+    const cookie = req.cookies['connect.sid'].substring(2,34);
+    if(!store.sessions[cookie]) {
+        return res.redirect('/');
+    }
+
+    return res.render('messages');
+});
+
+app.get('/notifications', (req, res) => {
+    if(!req.cookies['connect.sid']) {
+        return res.redirect('/');
+    }
+
+    const cookie = req.cookies['connect.sid'].substring(2,34);
+    if(!store.sessions[cookie]) {
+        return res.redirect('/');
+    }
+
+    return res.render('notifications');
+});
+
+app.get('/calendar', (req, res) => {
+    if(!req.cookies['connect.sid']) {
+        return res.redirect('/');
+    }
+
+    const cookie = req.cookies['connect.sid'].substring(2,34);
+    if(!store.sessions[cookie]) {
+        return res.redirect('/');
+    }
+
+    return res.render('calendar');
+});
+
+
+app.get('/config', (req, res) => {
+    if(!req.cookies['connect.sid']) {
+        return res.redirect('/');
+    }
+
+    const cookie = req.cookies['connect.sid'].substring(2,34);
+    if(!store.sessions[cookie]) {
+        return res.redirect('/');
+    }
+
+    return res.render('config');
+});
+
 app.get('/user/uuid', (req, res) => {
     if(!req.cookies['connect.sid']) {
         return res.redirect('/');
@@ -139,7 +205,13 @@ app.get('/followers/:uuid', async (req, res) => {
 app.get('/post/:uuid', async (req, res) => {
     const posts = await profile.getPosts(req.params.uuid);
 
-    res.status(200).json({success: true, posts: posts});
+    return res.status(200).json({success: true, posts: posts});
+});
+
+app.get('/post', async (req, res) => {
+    const postArr = await posts.getSugerence();
+
+    return res.status(200).json({success: true, posts: postArr});
 });
 
 app.get('/post/foryou', async (req, res) => {

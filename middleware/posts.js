@@ -7,7 +7,7 @@ async function create(uuid, body) {
 async function getSugerence(req, res) {
     let posts = await getPosts();
 
-    return res.status(200).json({success: true, posts: posts});
+    return posts;
 }
 
 module.exports = {

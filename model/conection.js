@@ -116,8 +116,8 @@ async function setUserPrivateID(email, uuid) {
 async function setPosts(uuid, post) {
     const date = new Date().toISOString();
     let {records, summary} = await driver.executeQuery(
-        'MATCH (a:Profile) WHERE a.uuid = $uuid CREATE (a)-[:post]->(b:Poem {body: $body, title: $title, created: datetime($date)}) return b',
-        {uuid : uuid, body : post.body, title : post.title, date: date},
+        'MATCH (a:Profile) WHERE a.uuid = $uuid CREATE (a)-[:post]->(b:Poem {body: $body, title: $title, message: $message, created: datetime($date)}) return b',
+        {uuid : uuid, body : post.body, title : post.title, message : post.message,  date: date},
         { database : 'neo4j' }
     );
 
@@ -150,7 +150,7 @@ async function searchUsers(pattern) {
 
 async function seachPost(pattern) {
     let {records, summary} = await driver.executeQuery(
-        'MATCH (a:Poem)<-[:post]-(b:Profile) WHERE a.title CONTAINS $pattern OR a.body CONTAINS $pattern OR a.message CONTAINS $pattern return id(a) as id, a, b ORDER BY a.created LIMIT 10',
+        'MATCH (a:Poem)<-[:post]-(b:Profile) WHERE a.title CONTAINS $pattern OR a.body CONTAINS $pattern OR a.message CONTAINS $pattern return id(a) as id, a, b ORDER BY a.created DESC LIMIT 10',
         { pattern: pattern },
         { database : 'neo4j' }
     );
@@ -214,7 +214,7 @@ async function deleteFriendRequest(destiny, origin) {
 
 async function getPosts() {
     let {records, summary} = await driver.executeQuery(
-        'MATCH (p:Poem)<-[:post]-(a:Profile) RETURN id(p) as id, p.title as title, p.body as body, p.message as message, a.name as autor, a.uuid as uuid, a.foto as foto ORDER BY p.created LIMIT 15',
+        'MATCH (p:Poem)<-[:post]-(a:Profile) RETURN id(p) as id, p.title as title, p.body as body, p.message as message, a.name as autor, a.uuid as uuid, a.foto as foto ORDER BY p.created DESC LIMIT 15',
         {},
         { database: 'neo4j' }
     );

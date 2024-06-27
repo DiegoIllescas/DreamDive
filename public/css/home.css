@@ -136,7 +136,6 @@ footer{
     display: flex;
     flex-direction: column;
     width: 28%;
-    border-left: 1px solid #cfcfcf;
 }
 
 .header-footer {
@@ -152,4 +151,62 @@ footer{
     flex-direction: column;
     gap: 24px;
     padding: 16px 8vw 1vh 16px;
+}
+
+#posts {
+    margin-top: 16px;
+}
+
+.create-post {
+    margin: 16px;
+}
+
+label {
+    color: var(--primary);
+}
+
+input {
+    padding: 16px 0;
+}
+
+.create-post > h2 {
+    color: var(--primary);
+    padding: 16px 0;
+}
+
+#create-post{ 
+    width: 100%;
+}
+
+#create-post > input {
+    width: 100%;
+    background-color: #030a13;
+    border-radius: 15px;
+    border: 1px solid var(--tertiary);
+    color: var(--primary);
+    padding: 8px 16px;
+    font-size: 18px;
+}
+
+#create-post > textarea {
+    width: 100%;
+    background-color: #030a13;
+    border-radius: 15px;
+    border: 1px solid var(--tertiary);
+    color: var(--primary);
+    padding: 8px 16px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.create-post > button {
+    display: block;
+    width: 100%;
+    border-radius: 15px;
+    padding: 16px 16px;
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: 1px;
+    border: 1px solid var(--tertiary);
+
 }

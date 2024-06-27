@@ -18,7 +18,7 @@
         </div>
         <div class="navigation">
             <ul>
-                <li><a><span class="material-symbols-outlined">home</span><p>Inicio</p></a></li>
+                <li><a href="home"><span class="material-symbols-outlined">home</span><p>Inicio</p></a></li>
                 <li><a href="explore"><span class="material-symbols-outlined">search</span><p>Explorar</p></a></li>
                 <li><a href="notifications"><span class="material-symbols-outlined">notifications</span><p>Notificaciones</p></a></li>
                 <li><a href="messages"><span class="material-symbols-outlined">mail</span><p>Mensajes</p></a></li>
@@ -37,18 +37,21 @@
     </nav>
     <main>
         <div class="create-post">
+            <h2>Publica tus poemas</h2>
             <form id="create-post" onsubmit="event.preventDefault()">
+                <label for="message">Mensage o Dedicatoria:</label><br>
+                <input type="text" required id="message"><br><br>
                 <label for="title">Titulo</label><br>
-                <input type="text" name="title" id="title" required><br>
+                <input type="text" name="title" id="title" required><br><br>
                 <label for="body">Que piensas?</label><br>
                 <textarea name="body" id="body" cols="30" rows="8" required></textarea><br><br>
             </form>
-            <button form="create-post" type="submit" onclick="handleSubmit()">Publicar</button>
+            <button form="create-post" type="submit" onclick="handleSubmit()" class="primary">Publicar</button>
         </div>
     </main>
     <footer>
         <div class="header-footer">
-            Destacados
+            
         </div>
         <div class="footer-container">
             <div class="event-card">
