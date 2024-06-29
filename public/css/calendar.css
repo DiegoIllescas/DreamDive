@@ -1,0 +1,65 @@
+.header-calendar {
+    width: 100%;
+    color: var(--primary);
+    padding: 2vh 4vw;
+    font-size: 24px;
+}
+
+.header-calendar > h2 {
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+#calendario {
+    border-radius: 15px;
+    padding: 1vh 0 0 0;
+    margin-left: 16px;
+    width: 95%;
+    margin: 0 auto;
+    border: 1px solid #030a13;
+    background-color: #030a13;
+  }
+
+  .month {
+    display: flex;
+    color: var(--primary);
+    width: 100%;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 1vh;
+  }
+  
+thead {
+    background-color: #0a2241;
+    color: var(--primary);
+}
+
+
+
+  #dias {
+    width: 100%;
+    border: 0px;
+    border-collapse: collapse;
+  }
+  
+  th {
+    text-align: center;
+    padding: 8px;
+  }
+  
+tr {
+    min-height: 100px;
+}
+
+  td {  
+    color: var(--primary);
+    padding: 5px;
+    border: 1px solid #ccc;
+    width: calc(100% / 7);
+  height: calc(100% / 7);
+  }
+  
+  .dia-actual {
+    background-color: #ccc;
+  }
+  

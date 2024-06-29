@@ -7,7 +7,7 @@
     <link rel="icon" href="logo.png" type="image/png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="css/home.css">
-    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/calendar.css">
 </head>
 <body>
     <nav>
@@ -37,7 +37,19 @@
         </div>
     </nav>
     <main>
-        
+        <div class="header-calendar">
+            <h2>Calendario de Actividades</h2>
+        </div>
+        <div id="calendario">
+            <div class="month">
+              <button id="anterior">Mes anterior</button>
+              <h1 id="month"></h1>
+              <button id="siguiente">Mes siguiente</button>
+            </div>
+            <table id="dias">
+            </table>
+          </div>
+          
     </main>
     <footer>
         <div class="header-footer">
@@ -54,7 +66,6 @@
         <div class="footer"></div>
     </footer>
     <script src="scripts/home.js"></script>
-    <script>
-    </script>
+    <script src="scripts/calendar.js"></script>
 </body>
 </html>
