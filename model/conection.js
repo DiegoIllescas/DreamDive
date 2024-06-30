@@ -213,7 +213,7 @@ async function deleteFriendRequest(destiny, origin) {
     return (summary.counters.updates().relationshipsDeleted > 0);
 }
 
-async function getPosts() {
+async function getPosts(uuid) {
     let {records, summary} = await driver.executeQuery(
         'MATCH (p:Poem)<-[:post]-(a:Profile) RETURN id(p) as id, p.title as title, p.body as body, p.message as message, a.name as autor, a.uuid as uuid, a.foto as foto ORDER BY p.created DESC LIMIT 15',
         {},
@@ -230,7 +230,9 @@ async function getPosts() {
             foto: "",
             message: "",
             title: "",
-            body: ""
+            body: "",
+            likes: 0,
+            likeFlag: false
         }
 
         post.id = record.get('id');
@@ -241,6 +243,7 @@ async function getPosts() {
         post.title = record.get('title');
         post.body = record.get('body');
         post.likes = await getLikes(post.id.low);
+        post.likeFlag = await isLiked(uuid, post.id.low);
         posts.push(post);
     }
 
@@ -249,8 +252,19 @@ async function getPosts() {
     return posts;
 }
 
-async function getLikes(id) {
-    return 45;
+async function isLiked(uuid, id) {
+    let {records} = await driver.executeQuery(
+        'MATCH (n:Poem)-[:like]-(u:Profile {uuid: $uuid}) WHERE ID(n) = $id return n',
+        { uuid : uuid, id: id},
+        { database : 'neo4j'}
+    );
+
+    let flag = false;
+    for(let record of records) {
+        flag = true;
+    }
+
+    return flag;
 }
 
 async function countFollowers(uuid) {
@@ -366,6 +380,28 @@ async function updatePerfil(uuid, data) {
     return (summary.counters.updates().propertiesSet > 0);
 }
 
+async function setLike(uuid, id) {
+    let { records, summary } = await driver.executeQuery(
+        'MATCH (p:Poem), (u:Profile {uuid: $uuid}) WHERE ID(p) = $id CREATE (u)-[r:like]->(p) RETURN r',
+        { uuid: uuid, id: parseInt(id) },
+        { database : 'neo4j' }
+    );
+
+    console.log(summary);
+
+    return (summary.counters.updates().relationshipsCreated > 0);
+}
+
+async function unsetLike(uuid, id) {
+    let { summary} = await driver.executeQuery(
+        'MATCH (p:Poem)<-[r:like]-(u:Profile {uuid: $uuid}) WHERE ID(p) = $id DELETE r',
+        { uuid: uuid, id: parseInt(id) },
+        { database : 'neo4j' }
+    );
+
+    return (summary.counters.updates().relationshipsDeleted > 0);
+}
+
 module.exports = {
     getUser,
     setUser,
@@ -383,5 +419,7 @@ module.exports = {
     countFollowers,
     getProfilePost, 
     getFeedbyUUID,
-    updatePerfil
+    updatePerfil,
+    setLike,
+    unsetLike
 }

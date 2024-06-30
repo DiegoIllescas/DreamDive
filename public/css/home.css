@@ -1,214 +1,214 @@
 :root {
-    --primary: #FCFCFC;
-    --secondary: #030303;
-    --tertiary: #637df0;
+  --primary: #fcfcfc;
+  --secondary: #030303;
+  --tertiary: #637df0;
 }
 
-*{
-    margin: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  box-sizing: border-box;
 }
 
-body{
-    display: flex;
-    font-family: 'Inter';
-    min-height: 100vh;
-    background-color: #02162E;
+body {
+  display: flex;
+  font-family: "Inter";
+  min-height: 100vh;
+  background-color: #02162e;
 }
 
-nav{
-    position: sticky;
-    max-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    width: 28%;
+nav {
+  position: sticky;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 28%;
 }
 
 .header-logo {
-    display: flex;
-    padding: 1vh 0 1vh 8vw;
-    gap: 16px;
+  display: flex;
+  padding: 1vh 0 1vh 8vw;
+  gap: 16px;
 }
 
 .header-logo > h2 {
-    color: var(--primary);
-    font-weight: 500;
-    margin: auto 0;
-    font-size: 30px;
-    letter-spacing: 2px;
+  color: var(--primary);
+  font-weight: 500;
+  margin: auto 0;
+  font-size: 30px;
+  letter-spacing: 2px;
 }
 
 .navigation {
-    display: flex;
-    padding: 16px 0 16px 8vw;
+  display: flex;
+  padding: 16px 0 16px 8vw;
 }
 
 .navigation > ul {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    list-style-type: none;
-    position: sticky;
-    margin: 0;
-    padding: 0 16px 0 0;
-    gap: 8px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  position: sticky;
+  margin: 0;
+  padding: 0 16px 0 0;
+  gap: 8px;
 }
 
 ul > li {
-    display: block;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    text-align: center;
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
 }
 
-li > a{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    vertical-align: middle;
-    text-decoration: none;
-    padding: 16px 0;
-    border-radius: 15px;
-    border: 1px solid #4767f5;
-    color: var(--primary);
+li > a {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  vertical-align: middle;
+  text-decoration: none;
+  padding: 16px 0;
+  border-radius: 15px;
+  border: 1px solid #4767f5;
+  color: var(--primary);
 }
 
-li > a:hover {    
-    background-color: #030a13;
-    cursor: pointer;
+li > a:hover {
+  background-color: #030a13;
+  cursor: pointer;
 }
 
 a > p {
-    margin: auto 0;
-    margin-left: 8px;
+  margin: auto 0;
+  margin-left: 8px;
 }
 
 main {
-    display: flex;
-    flex-direction: column;
-    width: 44%;
+  display: flex;
+  flex-direction: column;
+  width: 44%;
 }
 
 .header {
-    width: 100%;
-    display: flex;
+  width: 100%;
+  display: flex;
 }
 
 .nav-selector {
-    display: block;
-    width: 100%;
-    text-align: center;
-    padding: 2vh 0;
-    font-size: 24px;
-    font-weight: 250;
-    color: var(--primary);
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 2vh 0;
+  font-size: 24px;
+  font-weight: 250;
+  color: var(--primary);
 }
 
 .nav-selector:hover {
-    background-color: #030a13;
-    cursor: pointer;
+  background-color: #030a13;
+  cursor: pointer;
 }
 
 .nav-active {
-    border-bottom: 3px solid var(--tertiary);
+  border-bottom: 3px solid var(--tertiary);
 }
 
-.nav-bottom{
-    margin-top: auto;
+.nav-bottom {
+  margin-top: auto;
 }
 
 .primary {
-    color: var(--primary);
-    background-color: var(--tertiary);
+  color: var(--primary);
+  background-color: var(--tertiary);
 }
 
 .primary:hover {
-    color: var(--primary);
-    background-color: #4767f5;
+  color: var(--primary);
+  background-color: #4767f5;
 }
 
 .exit:hover {
-    background-color: #af3832;
-    border-color: #af3832;
+  background-color: #af3832;
+  border-color: #af3832;
 }
 
-footer{
-    display: flex;
-    flex-direction: column;
-    width: 28%;
+footer {
+  display: flex;
+  flex-direction: column;
+  width: 28%;
 }
 
 .header-footer {
-    padding: 1vh 8vw 1vh 16px;
-    font-weight: 200;
-    color: var(--primary);
-    font-size: 24px;
+  padding: 1vh 8vw 1vh 16px;
+  font-weight: 200;
+  color: var(--primary);
+  font-size: 24px;
 }
 
 .footer-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    padding: 16px 8vw 1vh 16px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 16px 8vw 1vh 16px;
 }
 
 #posts {
-    margin-top: 16px;
+  margin-top: 16px;
 }
 
 .create-post {
-    margin: 16px;
-    padding: 36px;
-    gap: 8px;
+  margin: 16px;
+  padding: 36px;
+  gap: 8px;
 }
 
 label {
-    color: var(--primary);
+  color: var(--primary);
 }
 
 input {
-    padding: 16px 0;
+  padding: 16px 0;
 }
 
 .create-post > h2 {
-    color: var(--primary);
-    padding: 16px 0;
+  color: var(--primary);
+  padding: 16px 0;
 }
 
-#create-post{ 
-    width: 100%;
+#create-post {
+  width: 100%;
 }
 
 #create-post > input {
-    width: 100%;
-    background-color: #030a13;
-    border-radius: 15px;
-    border: 1px solid var(--tertiary);
-    color: var(--primary);
-    padding: 8px 16px;
-    font-size: 18px;
+  width: 100%;
+  background-color: #030a13;
+  border-radius: 15px;
+  border: 1px solid var(--tertiary);
+  color: var(--primary);
+  padding: 8px 16px;
+  font-size: 18px;
 }
 
 #create-post > textarea {
-    width: 100%;
-    background-color: #030a13;
-    border-radius: 15px;
-    border: 1px solid var(--tertiary);
-    color: var(--primary);
-    padding: 8px 16px;
-    font-size: 18px;
-    text-align: center;
+  width: 100%;
+  background-color: #030a13;
+  border-radius: 15px;
+  border: 1px solid var(--tertiary);
+  color: var(--primary);
+  padding: 8px 16px;
+  font-size: 18px;
+  text-align: center;
 }
 
 .create-post > button {
-    display: block;
-    width: 100%;
-    border-radius: 15px;
-    padding: 16px 16px;
-    font-weight: 400;
-    font-size: 18px;
-    letter-spacing: 1px;
-    border: 1px solid var(--tertiary);
+  display: block;
+  width: 100%;
+  border-radius: 15px;
+  padding: 16px 16px;
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 1px;
+  border: 1px solid var(--tertiary);
 }
