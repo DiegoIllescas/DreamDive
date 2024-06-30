@@ -12,6 +12,16 @@ const { google } = require('googleapis');
 const fs = require('fs');
 const stream = require('stream');
 
+
+const {Storage} = require('@google-cloud/storage');
+const storage = new Storage({
+    projectId: 'calcium-ember-427018-t1',
+    keyFilename: './claves_dreamdive.json' // La ruta al archivo JSON de las credenciales
+});
+
+
+
+
 const credentials = require('./claves_dreamdive.json');
 const authGoogle = new google.auth.GoogleAuth({
     credentials,
@@ -373,10 +383,10 @@ app.put('/updateProfile', async (req, res) => {
 
 
         const photoB64 = photo.replace(/^data:image\/\w+;base64,/, "");
-        const photoURL = await uploadImageToDrive(photoB64, `${userUUID}-photo.jpg`);
+        const photoURL = await uploadImageToStorage(photoB64, `${userUUID}-photo.jpg`);
 
         const backgroundB64 = background.replace(/^data:image\/\w+;base64,/, "");
-        const backgroundURL = await uploadImageToDrive(backgroundB64, `${userUUID}-background.jpg`);
+        const backgroundURL = await uploadImageToStorage(backgroundB64, `${userUUID}-background.jpg`);
 
         console.log('--> name', name, 'description', description);
         console.log('Photo profile URL:', photoURL);
@@ -401,53 +411,24 @@ app.put('/updateProfile', async (req, res) => {
 });
 
 
-async function uploadImageToDrive(base64Image, fileName) {
-    const authClient = await authGoogle.getClient();
-    const drive = google.drive({ version: 'v3', auth: authClient });
+async function uploadImageToStorage(base64Image, fileName) {
+    const bucketName = 'dreamdive'; // Reemplaza con el nombre de tu bucket
+    const bucket = storage.bucket(bucketName);
+    const file = bucket.file(fileName);
 
-    // Decode Base64 to Buffer
     const buffer = Buffer.from(base64Image, 'base64');
-
-    // Create a Readable Stream from the Buffer
     const bufferStream = new stream.PassThrough();
     bufferStream.end(buffer);
 
-    const fileMetadata = {
-        name: fileName,
-        mimeType: 'image/jpeg'
-    };
-    const media = {
-        mimeType: 'image/jpeg',
-        body: bufferStream
-    };
+    await file.save(bufferStream);
 
-    return new Promise(async (resolve, reject) => {
-        drive.files.create({
-            resource: fileMetadata,
-            media: media,
-            fields: 'id, webViewLink'
-        }, async (err, file) => {
-            if (err) {
-                reject(err);
-            } else {
-                // Set permissions to 'reader' for 'anyone' (publicly readable)
-                try {
-                    await drive.permissions.create({
-                        fileId: file.data.id,
-                        requestBody: {
-                            role: 'reader',
-                            type: 'anyone'
-                        }
-                    });
-                    resolve(file.data.webViewLink);
-                } catch (permissionError) {
-                    console.error("Error setting file permissions:", permissionError);
-                    reject(permissionError); // Reject the promise if there's an error
-                }
-            }
-        });
-    });
+    // No es necesario hacer el archivo público si ya configuraste el bucket para acceso público
+
+    const publicUrl = `https://storage.googleapis.com/${bucketName}/${fileName}`;
+    return publicUrl;
 }
+
+
 
 
 

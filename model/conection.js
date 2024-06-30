@@ -359,7 +359,7 @@ async function getLikes(id) {
 async function updatePerfil(uuid, data) {
     let {records, summary} = await driver.executeQuery(
         'MATCH (u:Profile {uuid: $uuid}) SET u.name = $name, u.description = $description, u.foto = $foto, u.background = $background RETURN u',
-        { uuid : uuid, name : data.name, description : data.description, foto: data.photoURL, background: backgroundURL },
+        { uuid : uuid, name : data.name, description : data.description, foto: data.photoURL, background: data.backgroundURL },
         { database : 'neo4j'}
     );
 

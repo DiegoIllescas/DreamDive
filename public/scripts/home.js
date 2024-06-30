@@ -215,7 +215,7 @@ function renderPost(posts) {
             console.log(target);
         }, true);
 
-        const profileURL = '../'+ post.foto;
+        const profileURL = post.foto;
         const autor = post.autor;
         const message = post.message;
         const title = post.title;
@@ -223,6 +223,7 @@ function renderPost(posts) {
         const id = post.id;
 
         const body = bodywithout.replace(/\n/g, "<br>");
+
 
         const postInnerHTML = `<div class="post-header">
             <div class="autor-foto">
