@@ -8,6 +8,8 @@ const cookieParser = require('cookie-parser')
 require('dotenv').config();
 
 
+
+
 const { google } = require('googleapis');
 const fs = require('fs');
 const stream = require('stream');
@@ -39,6 +41,8 @@ const profile = require('./middleware/profile');
 
 let app = express();
 
+app.use(express.json({ limit: '50mb' }));
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -56,7 +60,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 
-app.use(express.json({ limit: '50mb' }));
+
 
 
 app.get('/', function(req, res) {
