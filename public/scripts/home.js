@@ -194,6 +194,40 @@ async function getFeed() {
             console.log(data.posts);
             const postsToRender = data.posts;
             renderPost(postsToRender);
+            const likesElements = document.querySelectorAll('[id^="favorite-"]');
+            likesElements.forEach(element => {
+                element.addEventListener('click', () => {
+                    if(element.firstChild.classList.contains("selected")) {
+                        element.firstChild.classList.remove("selected");
+                        element.lastChild.textContent = parseInt(element.lastChild.textContent) - 1;
+                        removeLike(element.id.split("-")[1]);
+                    }else {
+                        element.firstChild.classList.add("selected");
+                        element.lastChild.textContent = parseInt(element.lastChild.textContent) + 1;
+                        addLike(element.id.split("-")[1]);
+                    }
+                });
+            });
+        }
+    });
+}
+
+function addLike(id) {
+    fetch(`/like/${id}`, { method: "POST", mode: 'cors', credentials: 'same-origin' })
+    .then(response => response.json())
+    .then(data => {
+        if(!data.success) {
+            alert(data.error);
+        }
+    });
+}
+
+function removeLike(id) {
+    fetch(`/like/${id}`, { method: "DELETE", mode: 'cors', credentials: 'same-origin' })
+    .then(response => response.json())
+    .then(data => {
+        if(!data.success) {
+            alert(data.error);
         }
     });
 }
@@ -209,13 +243,7 @@ function renderPost(posts) {
         postContainer.classList.add('post');
         postContainer.id = `${post.id.low}`;
 
-        postContainer.addEventListener('click', (event) => {
-            const target = event.target.id;
-            window.location.href = `http://localhost:4000/poem/${target}`;
-            console.log(target);
-        }, true);
-
-        const profileURL = post.foto;
+        const profileURL = '../'+ post.foto;
         const autor = post.autor;
         const message = post.message;
         const title = post.title;
@@ -223,7 +251,6 @@ function renderPost(posts) {
         const id = post.id;
 
         const body = bodywithout.replace(/\n/g, "<br>");
-
 
         const postInnerHTML = `<div class="post-header">
             <div class="autor-foto">
@@ -243,7 +270,7 @@ function renderPost(posts) {
          </div>
         <div class="interact">
             <a><span class="material-symbols-outlined">chat_bubble</span></a>
-            <a><span class="material-symbols-outlined">favorite</span><span class="info-post">${post.likes.low}<span></a>
+            <a id="favorite-${post.id.low}"><span class="material-symbols-outlined ${post.likeFlag ? "selected" : ""}">favorite</span><span class="info-post">${post.likes.low}<span></a>
             <a><span class="material-symbols-outlined">bookmark</span></a>
         </div>`;
 
@@ -251,9 +278,6 @@ function renderPost(posts) {
         container.appendChild(postContainer);
     });
 }
-
-
-
 
 // profile ejs
 

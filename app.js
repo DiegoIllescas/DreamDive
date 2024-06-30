@@ -235,7 +235,8 @@ app.get('/post/:uuid', async (req, res) => {
 });
 
 app.get('/post', async (req, res) => {
-    const postArr = await posts.getSugerence();
+    const cookie = req.cookies['connect.sid'].substring(2,34);
+    const postArr = await posts.getSugerence(JSON.parse(store.sessions[cookie]).user.uuid);
 
     return res.status(200).json({success: true, posts: postArr});
 });
@@ -250,7 +251,7 @@ app.get('/post/foryou', async (req, res) => {
         return res.redirect('/');
     }
 
-    console.log(JSON.parse(store.sessions[cookie]).user.uuid);
+    //console.log(JSON.parse(store.sessions[cookie]).user.uuid);
 
     let posts = await profile.getFeed(JSON.parse(store.sessions[cookie]).user.uuid)
 
@@ -331,6 +332,23 @@ app.post('/friendship/send', async (req, res) => {
 });
 
 app.post('/search', entity.get);
+
+app.post('/like/:id', async (req, res) => {
+    if(!req.cookies['connect.sid']) {
+        return res.redirect('/');
+    }
+
+    const cookie = req.cookies['connect.sid'].substring(2,34);
+    if(!store.sessions[cookie]) {
+        return res.redirect('/');
+    }
+
+    if(! await posts.addlike(JSON.parse(store.sessions[cookie]).user.uuid, req.params.id)) {
+        return res.status(400).json({success: false, error: 'Algo salio mal'});
+    }
+
+    return res.status(200).json({success: true});
+});
 
 app.put('/friendship/accept', async (req, res) => {
     if(!req.cookies['connect.sid']) {
@@ -441,6 +459,23 @@ app.delete('/sesion', (req, res) => {
             return res.status(200).json({success: true});
         }
     });
+});
+
+app.delete('/like/:id', async (req, res) => {
+    if(!req.cookies['connect.sid']) {
+        return res.redirect('/');
+    }
+
+    const cookie = req.cookies['connect.sid'].substring(2,34);
+    if(!store.sessions[cookie]) {
+        return res.redirect('/');
+    }
+
+    if(! await posts.removeLike(JSON.parse(store.sessions[cookie]).user.uuid, req.params.id)) {
+        return res.status(400).json({success: false, error: 'Algo salio mal'});
+    }
+
+    return res.status(200).json({success: true});
 });
 
 app.listen(4000);
