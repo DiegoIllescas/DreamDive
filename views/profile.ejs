@@ -60,11 +60,19 @@
 
         <div class="profile">
             <div class="profile-background">
-                <img class="img-bkgnd-profile" src="../<%=user.background%>" alt="backgrounds">
+                <% if(user.background.startsWith("http")) {  %>
+                    <img class="img-bkgnd-profile" src="<%=user.background %>" alt="backgrounds">
+                <% } else { %>
+                    <img class="img-bkgnd-profile" src="../<%=user.background %>" alt="backgrounds">
+                <% } %>
             </div>
             <div class="profile-foto">
                 <div class="foto">
-                    <img class="img-profile-foto" src="../<%=user.foto %>" alt="foto">
+                    <% if(user.foto.startsWith("http")) {  %>
+                        <img class="img-profile-foto" src="<%=user.foto %>" alt="foto">
+                    <% } else { %>
+                        <img class="img-profile-foto" src="../<%=user.foto %>" alt="foto">
+                    <% } %>
                 </div>
             </div>
             <div class="edit-button">

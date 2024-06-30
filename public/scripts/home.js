@@ -100,7 +100,7 @@ function renderResult(content) {
             const target = event.target.id;
             window.location.href = `http://localhost:4000/profile/${target}`;
             console.log(target);
-        });
+        }, true);
 
         const userInnerHTML = `<div class="img-container">
             <img src="${fotoURL}" alt="${name}" width="64px" height="64px">
@@ -207,6 +207,13 @@ function renderPost(posts) {
     posts.forEach((post) => {
         const postContainer = document.createElement('div');
         postContainer.classList.add('post');
+        postContainer.id = `${post.id.low}`;
+
+        postContainer.addEventListener('click', (event) => {
+            const target = event.target.id;
+            window.location.href = `http://localhost:4000/poem/${target}`;
+            console.log(target);
+        }, true);
 
         const profileURL = '../'+ post.foto;
         const autor = post.autor;
@@ -235,7 +242,7 @@ function renderPost(posts) {
          </div>
         <div class="interact">
             <a><span class="material-symbols-outlined">chat_bubble</span></a>
-            <a><span class="material-symbols-outlined">favorite</span></a>
+            <a><span class="material-symbols-outlined">favorite</span><span class="info-post">${post.likes.low}<span></a>
             <a><span class="material-symbols-outlined">bookmark</span></a>
         </div>`;
 

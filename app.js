@@ -387,13 +387,12 @@ app.put('/updateProfile', async (req, res) => {
 
 
         // Suponiendo que tienes un método users.updateProfile()
-        /* const updateResult = await users.updateProfile(userUUID, { name, description, photoURL, backgroundURL });
+        const updateResult = await users.updateProfile(userUUID, { name, description, photoURL, backgroundURL });
 
         if (!updateResult) {
             return res.status(500).json({ success: false, error: 'Error updating profile' }); // Error al actualizar el perfil
         }
 
-        */
         return res.status(200).json({ success: true, message: 'Profile updated successfully' }); // Perfil actualizado con éxito
     } catch (error) {
         console.error('Error updating profile:', error);

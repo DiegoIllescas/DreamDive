@@ -149,8 +149,6 @@
     color: var(--primary);
 }
 
-
-
 /* Modal styles */
 .modal {
     display: none; /* Hidden by default */
@@ -186,3 +184,7 @@
     cursor: pointer;
 }
 
+.interact > a {
+    display: flex;
+    gap: 8px;
+}

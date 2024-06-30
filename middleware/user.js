@@ -1,4 +1,4 @@
-const { getUser, setUser, setUserPrivateID, getProfile } = require('../model/conection');
+const { getUser, setUser, setUserPrivateID, getProfile, updatePerfil } = require('../model/conection');
 const crypto = require('crypto');
 
 async function create(req, res) {
@@ -39,6 +39,10 @@ async function getUserByUUID(uuid) {
     return await getProfile(uuid);
 }
 
+async function updateProfile(uuid, data) {
+    return await updatePerfil(uuid, data);
+}
+
 module.exports = {
-    create, setUUID, getUserByUUID
+    create, setUUID, getUserByUUID, updateProfile
 }

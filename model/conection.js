@@ -166,6 +166,7 @@ async function seachPost(pattern) {
         postFound.autor = record.get('b').properties.name;
         postFound.foto = record.get('b').properties.foto;
         postFound.uuid = record.get('b').properties.uuid;
+        postFound.likes = await getLikes(postFound.id);
         posts.push(postFound);
     }
 
@@ -285,7 +286,8 @@ async function getProfilePost(uuid) {
             foto: "",
             message: "",
             title: "",
-            body: ""
+            body: "",
+            likes: 0
         }
 
         post.id = record.get('id').low;
@@ -294,7 +296,8 @@ async function getProfilePost(uuid) {
         post.foto = record.get('foto');
         post.message = record.get('message');
         post.title = record.get('title');
-        post.body = record.get('body')
+        post.body = record.get('body');
+        post.likes = await getLikes(post.id);
 
         posts.push(post);
     }
@@ -319,7 +322,8 @@ async function getFeedbyUUID(uuid) {
             foto: "",
             message: "",
             title: "",
-            body: ""
+            body: "",
+            likes: 0
         }
 
         post.id = record.get('id').low;
@@ -329,11 +333,37 @@ async function getFeedbyUUID(uuid) {
         post.message = record.get('message');
         post.title = record.get('title');
         post.body = record.get('body')
-
+        post.likes = await getLikes(post.id);
         posts.push(post);
     }
 
     return posts;
+}
+
+async function getLikes(id) {
+    let {records, summary} = await driver.executeQuery(
+        'MATCH (n:Poem)<-[r:like]-() WHERE ID(n) = $id RETURN count(r) as likes',
+        { id : id },
+        { database : 'neo4j' }
+    );
+
+    let likes = 0;
+
+    for(let record of records) {
+        likes = record.get('likes');
+    }
+
+    return likes;
+}
+
+async function updatePerfil(uuid, data) {
+    let {records, summary} = await driver.executeQuery(
+        'MATCH (u:Profile {uuid: $uuid}) SET u.name = $name, u.description = $description, u.foto = $foto, u.background = $background RETURN u',
+        { uuid : uuid, name : data.name, description : data.description, foto: data.photoURL, background: backgroundURL },
+        { database : 'neo4j'}
+    );
+
+    return (summary.counters.updates().propertiesSet > 0);
 }
 
 module.exports = {
@@ -352,5 +382,6 @@ module.exports = {
     getPosts,
     countFollowers,
     getProfilePost, 
-    getFeedbyUUID
+    getFeedbyUUID,
+    updatePerfil
 }
