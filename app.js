@@ -8,6 +8,19 @@ const cookieParser = require('cookie-parser')
 require('dotenv').config();
 
 
+const { google } = require('googleapis');
+const fs = require('fs');
+const stream = require('stream');
+
+const credentials = require('./claves_dreamdive.json');
+const authGoogle = new google.auth.GoogleAuth({
+    credentials,
+    scopes: ['https://www.googleapis.com/auth/drive']
+});
+
+
+
+
 const auth = require('./middleware/auth');
 const users = require('./middleware/user');
 const posts = require('./middleware/posts');
@@ -32,6 +45,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
+
+app.use(express.json({ limit: '50mb' }));
+
 
 app.get('/', function(req, res) {
     return res.render('index');
@@ -339,6 +355,105 @@ app.put('/friendship/decline', async (req, res) => {
 
     return res.status(200).json({success: true});
 });
+
+
+app.put('/updateProfile', async (req, res) => {
+    try {
+        if (!req.cookies['connect.sid']) {
+            return res.status(401).json({ success: false, error: 'Unauthorized' }); // No autorizado
+        }
+
+        const cookie = req.cookies['connect.sid'].substring(2, 34);
+        if (!store.sessions[cookie]) {
+            return res.status(401).json({ success: false, error: 'Unauthorized' }); // No autorizado
+        }
+
+        const userUUID = JSON.parse(store.sessions[cookie]).user.uuid;
+        const { name, description, photo, background } = req.body;
+
+
+        const photoB64 = photo.replace(/^data:image\/\w+;base64,/, "");
+        const photoURL = await uploadImageToDrive(photoB64, `${userUUID}-photo.jpg`);
+
+        const backgroundB64 = background.replace(/^data:image\/\w+;base64,/, "");
+        const backgroundURL = await uploadImageToDrive(backgroundB64, `${userUUID}-background.jpg`);
+
+        console.log('--> name', name, 'description', description);
+        console.log('Photo profile URL:', photoURL);
+        console.log('Background URL:', backgroundURL);
+
+
+        // Actualizar datos en la base de datos
+
+
+        // Suponiendo que tienes un método users.updateProfile()
+        /* const updateResult = await users.updateProfile(userUUID, { name, description, photoURL, backgroundURL });
+
+        if (!updateResult) {
+            return res.status(500).json({ success: false, error: 'Error updating profile' }); // Error al actualizar el perfil
+        }
+
+        */
+        return res.status(200).json({ success: true, message: 'Profile updated successfully' }); // Perfil actualizado con éxito
+    } catch (error) {
+        console.error('Error updating profile:', error);
+        return res.status(500).json({ success: false, error: 'Internal Server Error' }); // Error del servidor
+    }
+});
+
+
+async function uploadImageToDrive(base64Image, fileName) {
+    const authClient = await authGoogle.getClient();
+    const drive = google.drive({ version: 'v3', auth: authClient });
+
+    // Decode Base64 to Buffer
+    const buffer = Buffer.from(base64Image, 'base64');
+
+    // Create a Readable Stream from the Buffer
+    const bufferStream = new stream.PassThrough();
+    bufferStream.end(buffer);
+
+    const fileMetadata = {
+        name: fileName,
+        mimeType: 'image/jpeg'
+    };
+    const media = {
+        mimeType: 'image/jpeg',
+        body: bufferStream
+    };
+
+    return new Promise(async (resolve, reject) => {
+        drive.files.create({
+            resource: fileMetadata,
+            media: media,
+            fields: 'id, webViewLink'
+        }, async (err, file) => {
+            if (err) {
+                reject(err);
+            } else {
+                // Set permissions to 'reader' for 'anyone' (publicly readable)
+                try {
+                    await drive.permissions.create({
+                        fileId: file.data.id,
+                        requestBody: {
+                            role: 'reader',
+                            type: 'anyone'
+                        }
+                    });
+                    resolve(file.data.webViewLink);
+                } catch (permissionError) {
+                    console.error("Error setting file permissions:", permissionError);
+                    reject(permissionError); // Reject the promise if there's an error
+                }
+            }
+        });
+    });
+}
+
+
+
+
+
 
 app.delete('/sesion', (req, res) => {
     req.session.destroy((err) => {

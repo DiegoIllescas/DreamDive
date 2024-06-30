@@ -243,3 +243,77 @@ function renderPost(posts) {
         container.appendChild(postContainer);
     });
 }
+
+
+
+
+// profile ejs
+
+// Abrir modal al hacer clic en "Editar Perfil"
+document.getElementById('edit').addEventListener('click', function() {
+    document.getElementById('editModal').style.display = 'block';
+});
+
+// Cerrar modal
+function closeEditModal() {
+    document.getElementById('editModal').style.display = 'none';
+}
+
+document.getElementById('editForm').addEventListener('submit', async function (event) {
+    event.preventDefault();
+
+    const name = document.getElementById('editName').value;
+    const description = document.getElementById('editDescription').value;
+
+    const editPhoto = document.getElementById('editPhoto').files[0];
+    const editBackground = document.getElementById('editBackground').files[0];
+
+    const data = {
+        name: name,
+        description: description
+    };
+
+    // Convertir foto a Base64 (si se seleccionó)
+    if (editPhoto) {
+        data.photo = await toBase64(editPhoto);
+    }
+
+    // Convertir fondo a Base64 (si se seleccionó)
+    if (editBackground) {
+        data.background = await toBase64(editBackground);
+    }
+
+    //console.log(data); // Verificar que las imágenes estén incluidas en data
+
+    fetch('/updateProfile', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    })
+        .then(response => {
+            if (response.ok) {
+                closeEditModal();
+                location.reload(); // Recargar la página después de actualizar
+            } else {
+                throw new Error('Error al actualizar el perfil');
+            }
+        })
+        .catch(error => {
+            alert(error.message);
+        });
+});
+
+// Función auxiliar para convertir a Base64
+async function toBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+        reader.readAsDataURL(file);
+    });
+}
+
+
+
+
+

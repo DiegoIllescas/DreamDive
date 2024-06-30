@@ -41,6 +41,23 @@
         </div>
     </nav>
     <main>
+
+        <!-- modal para editar el perfil -->
+        <div id="editModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeEditModal()">&times;</span>
+                <h2>Editar Perfil</h2>
+                <form id="editForm">
+                    <input type="text" id="editName" placeholder="Nuevo nombre" value="<%= user.name %>"><br>
+                    <textarea id="editDescription" placeholder="Nueva biografía"><%= user.description || "" %></textarea><br>
+                    <input type="file" id="editPhoto" accept="image/*"><br>
+                    <input type="file" id="editBackground" accept="image/*"><br>
+                    <button type="submit">Guardar cambios</button>
+                </form>
+            </div>
+        </div>
+
+
         <div class="profile">
             <div class="profile-background">
                 <img class="img-bkgnd-profile" src="../<%=user.background%>" alt="backgrounds">
