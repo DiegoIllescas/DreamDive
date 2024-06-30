@@ -243,7 +243,7 @@ function renderPost(posts) {
         postContainer.classList.add('post');
         postContainer.id = `${post.id.low}`;
 
-        const profileURL = '../'+ post.foto;
+        const profileURL =  post.foto;
         const autor = post.autor;
         const message = post.message;
         const title = post.title;
