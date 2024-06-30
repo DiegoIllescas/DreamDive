@@ -404,11 +404,21 @@ app.put('/updateProfile', async (req, res) => {
         const { name, description, photo, background } = req.body;
 
 
-        const photoB64 = photo.replace(/^data:image\/\w+;base64,/, "");
-        const photoURL = await uploadImageToStorage(photoB64, `${userUUID}-photo.jpg`);
+        // https://storage.googleapis.com/dreamdive/%40lizardina-photo.jpg
+        let photoB64 = '';
+        let photoURL = 'https://storage.googleapis.com/dreamdive/purpleprofile.png';
+        let backgroundB64 = '';
+        let backgroundURL = 'https://storage.googleapis.com/dreamdive/default.jpg';
 
-        const backgroundB64 = background.replace(/^data:image\/\w+;base64,/, "");
-        const backgroundURL = await uploadImageToStorage(backgroundB64, `${userUUID}-background.jpg`);
+        if(photo) {
+            photoB64 = photo.replace(/^data:image\/\w+;base64,/, "");
+            photoURL = await uploadImageToStorage(photoB64, `${userUUID}-photo.jpg`);
+        }
+
+        if(background) {
+            backgroundB64 = background.replace(/^data:image\/\w+;base64,/, "");
+            backgroundURL = await uploadImageToStorage(backgroundB64, `${userUUID}-background.jpg`);
+        }
 
         console.log('--> name', name, 'description', description);
         console.log('Photo profile URL:', photoURL);
