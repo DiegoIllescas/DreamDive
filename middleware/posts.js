@@ -1,4 +1,4 @@
-const { getPosts, setPosts, setLike, unsetLike } = require('../model/conection');
+const { getPosts, setPosts, setLike, unsetLike, setSave, unsetSave } = require('../model/conection');
 
 async function create(uuid, body) {
     return await setPosts(uuid, body);
@@ -17,6 +17,14 @@ async function removeLike(uuid, id) {
     return await unsetLike(uuid, id);
 }
 
+async function addSave(uuid, id) {
+    return await setSave(uuid, id);
+}
+
+async function removeSave(uuid, id) {
+    return await unsetSave(uuid, id);
+}
+
 module.exports = {
-    create, getSugerence, addlike, removeLike
+    create, getSugerence, addlike, removeLike, addSave, removeSave
 }

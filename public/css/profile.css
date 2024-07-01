@@ -194,3 +194,25 @@
   font-variation-settings: "FILL" 1;
   color: red;
 }
+
+.saved {
+  font-variation-settings: "FILL" 1;
+  color: #4767f5;
+}
+
+.header-main {
+  width: 100%;
+  color: var(--primary);
+  padding: 2vh 4vw;
+  font-size: 24px;
+}
+
+.header-main > h2 {
+  color: var(--primary);
+  letter-spacing: 1px;
+  font-weight: 300;
+}
+
+.post-container {
+  padding: 1vh 4vw;
+}
