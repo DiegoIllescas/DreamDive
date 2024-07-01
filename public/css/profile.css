@@ -163,15 +163,62 @@
 }
 
 .modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
+  background-color: #030a13;
+  margin: 10% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 30%;
+}
+
+.modal-content > h2 {
+  color: var(--primary);
+}
+
+#editForm {
+  width: 100%;
+}
+
+#editForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#editForm > input {
+  background-color: #030a13;
+  border: 1px solid #4767f5;
+  color: var(--primary);
+  border-radius: 15px;
+  padding: 16px 16px;
+}
+
+#editForm > textarea {
+  font-family: "Inter";
+  font-size: 14px;
+  background-color: #030a13;
+  border: 1px solid #4767f5;
+  color: var(--primary);
+  border-radius: 15px;
+  padding: 16px 16px;
+}
+
+#editForm > button {
+  margin: 0 auto;
+  width: 50%;
+  cursor: pointer;
+  background-color: var(--tertiary);
+  border: 1px solid var(--tertiary);
+  color: var(--primary);
+  border-radius: 15px;
+  padding: 16px 16px;
+}
+
+#editForm > button:hover {
+  background-color: #4767f5;
 }
 
 .close-btn {
-  color: #aaa;
+  color: var(--primary);
   float: right;
   font-size: 28px;
   font-weight: bold;

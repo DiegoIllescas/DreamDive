@@ -4,12 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DreamDive - Explorar</title>
+    <title>DreamDive - Inicio</title>
     <link rel="icon" href="logo.png" type="image/png">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="css/home.css">
-    <link rel="stylesheet" href="css/explore.css">
     <link rel="stylesheet" href="css/profile.css">
 </head>
 
@@ -39,7 +38,7 @@
                 <li><a href="calendar"><span class="material-symbols-outlined">calendar_month</span>
                         <p>Calendario</p>
                     </a></li>
-                <li><a href="config"><span class="material-symbols-outlined">settings</span>
+                <li><a><span class="material-symbols-outlined">settings</span>
                         <p>Más opciones</p>
                     </a></li>
                 <li><a href="public" class="primary"><span class="material-symbols-outlined">ink_pen</span>
@@ -56,21 +55,32 @@
         </div>
     </nav>
     <main>
-        <div class="search">
-            <form id="search" onsubmit="event.preventDefault()">
-                <input type="text" name="search-field" id="search-field" required>
-            </form>
-            <button type="submit" form="search" onclick="search()"><span
-                    class="material-symbols-outlined">search</span><span class="btn-name">Buscar</span></button>
+        <div class="header">
+            <a class="nav-selector nav-active" id="for-you">Aprende lo básico</a>
         </div>
-        <br>
-        <div class="result-container">
-            <div id="main-container">
-
-            </div>
-            <div id="posts">
-
-            </div>
+        <div class="material">
+            <h3>Como Declamar</h3>
+            <p>Declamar es el acto de recitar textos poéticos en voz alta, interpretando su significado y emoción con la
+                intención de transmitirlos al público. Es una forma de arte escénico que involucra la voz, la
+                modulación, la gestualidad y la expresión corporal para dar vida a las palabras y conectar con los
+                oyentes.</p>
+            <br><br>
+            <h3>Video tutorial</h3>
+            <video width="600" height="400" controls>
+                <source src="https://storage.googleapis.com/dreamdive/video1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <br><br>
+            <h3>Como escribir</h3>
+            <p>La poesía, una forma de arte que ha cautivado corazones y mentes durante siglos, ofrece un medio único
+                para expresar emociones, pintar imágenes vívidas y explorar las profundidades de la experiencia humana.
+                Si te atrae el mundo de la poesía y deseas dar rienda suelta a tu espíritu creativo, ve este video.</p>
+            <br><br>
+            <h3>Video tutorial</h3>
+            <video width="600" height="400" controls>
+                <source src="https://storage.googleapis.com/dreamdive/como_escribir.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
     </main>
     <footer>
@@ -85,12 +95,14 @@
             <div class="compendium">
                 <h3>Eres nuevo en los poemas?</h3>
                 <p>No te preocupes, aprende lo básico desde aquí</p>
-                <button onclick="window.location.href = '/learn'">Aprender</button>
+                <button>Aprender</button>
             </div>
         </div>
         <div class="footer"></div>
     </footer>
     <script src="scripts/home.js"></script>
+    <script>
+    </script>
 </body>
 
 </html>

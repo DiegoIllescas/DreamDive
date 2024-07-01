@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DreamDive - Perfil</title>
     <link rel="icon" href="../logo.png" type="image/png">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="../css/home.css">
     <link rel="stylesheet" href="../css/profile.css">
 </head>
+
 <body>
     <nav>
         <div class="header-logo">
@@ -19,22 +22,38 @@
         </div>
         <div class="navigation">
             <ul>
-                <li><a href="../home"><span class="material-symbols-outlined">home</span><p>Inicio</p></a></li>
-                <li><a href="../explore"><span class="material-symbols-outlined">search</span><p>Explorar</p></a></li>
-                <li><a href="../messages"><span class="material-symbols-outlined">mail</span><p>Mensajes</p></a></li>
-                <li><a href="../saved"><span class="material-symbols-outlined">bookmark</span><p>Guardados</p></a></li>
-                
+                <li><a href="../home"><span class="material-symbols-outlined">home</span>
+                        <p>Inicio</p>
+                    </a></li>
+                <li><a href="../explore"><span class="material-symbols-outlined">search</span>
+                        <p>Explorar</p>
+                    </a></li>
+                <li><a href="../messages"><span class="material-symbols-outlined">mail</span>
+                        <p>Mensajes</p>
+                    </a></li>
+                <li><a href="../saved"><span class="material-symbols-outlined">bookmark</span>
+                        <p>Guardados</p>
+                    </a></li>
+
                 <li id="personal-info"></li>
-                
-                <li><a href="../calendar"><span class="material-symbols-outlined">calendar_month</span><p>Calendario</p></a></li>
-                <li><a href="../config"><span class="material-symbols-outlined">settings</span><p>Más opciones</p></a></li>
-                
-                <li><a href="../public" class="primary"><span class="material-symbols-outlined">ink_pen</span><p>Publicar</p></a></li>
+
+                <li><a href="../calendar"><span class="material-symbols-outlined">calendar_month</span>
+                        <p>Calendario</p>
+                    </a></li>
+                <li><a href="../config"><span class="material-symbols-outlined">settings</span>
+                        <p>Más opciones</p>
+                    </a></li>
+
+                <li><a href="../public" class="primary"><span class="material-symbols-outlined">ink_pen</span>
+                        <p>Publicar</p>
+                    </a></li>
             </ul>
         </div>
         <div class="navigation nav-bottom">
             <ul>
-                <li><a class="exit" onclick="closeSession()"><span class="material-symbols-outlined">logout</span><p>Cerrar sesión</p></a></li>
+                <li><a class="exit" onclick="closeSession()"><span class="material-symbols-outlined">logout</span>
+                        <p>Cerrar sesión</p>
+                    </a></li>
             </ul>
         </div>
     </nav>
@@ -46,10 +65,15 @@
                 <span class="close-btn" onclick="closeEditModal()">&times;</span>
                 <h2>Editar Perfil</h2>
                 <form id="editForm">
-                    <input type="text" id="editName" placeholder="Nuevo nombre" value="<%= user.name %>"><br>
-                    <textarea id="editDescription" placeholder="Nueva biografía"><%= user.description || "" %></textarea><br>
-                    <input type="file" id="editPhoto" accept="image/*"><br>
-                    <input type="file" id="editBackground" accept="image/*"><br>
+                    <label for="editName">Nombre</label>
+                    <input type="text" id="editName" placeholder="Nuevo nombre" value="<%= user.name %>">
+                    <label for="editDescription">Biografía</label>
+                    <textarea id="editDescription"
+                        placeholder="Nueva biografía"><%= user.description || "" %></textarea>
+                    <label for="editPhoto">Fotografía</label>
+                    <input type="file" id="editPhoto" accept="image/*">
+                    <label for="editBackground">Fondo de Perfil</label>
+                    <input type="file" id="editBackground" accept="image/*">
                     <button type="submit">Guardar cambios</button>
                 </form>
             </div>
@@ -69,21 +93,28 @@
                 <button type="button" class="edit-btn" id="edit">Editar Perfil</button>
             </div>
             <div class="profile-details">
-                <h2><%=user.name %></h2>
-                <span class="uuid"><%=user.uuid %></span>
+                <h2>
+                    <%=user.name %>
+                </h2>
+                <span class="uuid">
+                    <%=user.uuid %>
+                </span>
                 <br><br>
                 <div class="time">
                     <span class="material-symbols-outlined">calendar_month</span>
-                    <p>Se unio desde <%=user.created%></p>
+                    <p>Se unio desde <%=user.created%>
+                    </p>
                 </div>
                 <br>
                 <div class="description">
                     <h3>Biografía</h3><br>
                     <% if(user.description) { %>
-                        <p><%=user.description %></p>
-                    <% } else { %>
-                        <p>Escribe tu biografía aquí</p>
-                    <% } %>
+                        <p>
+                            <%=user.description %>
+                        </p>
+                        <% } else { %>
+                            <p>Escribe tu biografía aquí</p>
+                            <% } %>
                 </div>
                 <br>
                 <div class="followers">
@@ -95,18 +126,22 @@
             <div id="posts">
 
             </div>
+            <br><br><br><br>
         </div>
     </main>
     <footer>
         <div class="header-footer">
-            
+
         </div>
         <div class="footer-container">
-            <div class="event-card">
-
+            <div class="event-card" onclick="window.location.href = '/compendium'">
+                <img src="../imgs/book.png" alt="Compendio">
+                <h2>Compendio de Poemas</h2>
             </div>
             <div class="compendium">
-
+                <h3>Eres nuevo en los poemas?</h3>
+                <p>No te preocupes, aprende lo básico desde aquí</p>
+                <button onclick="window.location.href = '/learn'">Aprender</button>
             </div>
         </div>
         <div class="footer"></div>
@@ -118,4 +153,5 @@
         getPost();
     </script>
 </body>
+
 </html>

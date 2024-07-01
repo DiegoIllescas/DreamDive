@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DreamDive - Inicio</title>
     <link rel="icon" href="logo.png" type="image/png">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/profile.css">
 </head>
+
 <body>
     <nav>
         <div class="header-logo">
@@ -19,35 +22,54 @@
         </div>
         <div class="navigation">
             <ul>
-                <li><a href="home"><span class="material-symbols-outlined">home</span><p>Inicio</p></a></li>
-                <li><a href="explore"><span class="material-symbols-outlined">search</span><p>Explorar</p></a></li>
-                <li><a href="messages"><span class="material-symbols-outlined">mail</span><p>Mensajes</p></a></li>
-                <li><a href="saved"><span class="material-symbols-outlined">bookmark</span><p>Guardados</p></a></li>
+                <li><a href="home"><span class="material-symbols-outlined">home</span>
+                        <p>Inicio</p>
+                    </a></li>
+                <li><a href="explore"><span class="material-symbols-outlined">search</span>
+                        <p>Explorar</p>
+                    </a></li>
+                <li><a href="messages"><span class="material-symbols-outlined">mail</span>
+                        <p>Mensajes</p>
+                    </a></li>
+                <li><a href="saved"><span class="material-symbols-outlined">bookmark</span>
+                        <p>Guardados</p>
+                    </a></li>
                 <li id="personal-info"></li>
-                <li><a href="calendar"><span class="material-symbols-outlined">calendar_month</span><p>Calendario</p></a></li>
-                <li><a><span class="material-symbols-outlined">settings</span><p>Más opciones</p></a></li>
-                <li><a href="public" class="primary"><span class="material-symbols-outlined">ink_pen</span><p>Publicar</p></a></li>
+                <li><a href="calendar"><span class="material-symbols-outlined">calendar_month</span>
+                        <p>Calendario</p>
+                    </a></li>
+                <li><a><span class="material-symbols-outlined">settings</span>
+                        <p>Más opciones</p>
+                    </a></li>
+                <li><a href="public" class="primary"><span class="material-symbols-outlined">ink_pen</span>
+                        <p>Publicar</p>
+                    </a></li>
             </ul>
         </div>
         <div class="navigation nav-bottom">
             <ul>
-                <li><a class="exit" onclick="closeSession()"><span class="material-symbols-outlined">logout</span><p>Cerrar sesión</p></a></li>
+                <li><a class="exit" onclick="closeSession()"><span class="material-symbols-outlined">logout</span>
+                        <p>Cerrar sesión</p>
+                    </a></li>
             </ul>
         </div>
     </nav>
     <main>
-        
+
     </main>
     <footer>
         <div class="header-footer">
-            
+
         </div>
         <div class="footer-container">
-            <div class="event-card">
-
+            <div class="event-card" onclick="window.location.href = '/compendium'">
+                <img src="imgs/book.png" alt="Compendio">
+                <h2>Compendio de Poemas</h2>
             </div>
             <div class="compendium">
-
+                <h3>Eres nuevo en los poemas?</h3>
+                <p>No te preocupes, aprende lo básico desde aquí</p>
+                <button onclick="window.location.href = '/learn'">Aprender</button>
             </div>
         </div>
         <div class="footer"></div>
@@ -56,4 +78,5 @@
     <script>
     </script>
 </body>
+
 </html>

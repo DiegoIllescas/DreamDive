@@ -315,6 +315,32 @@ app.get("/poem/:id", async (req, res) => {
     .json({ success: true, poem: [poem], user: user, comments: comments });
 });
 
+app.get("/compendium", (req, res) => {
+  if (!req.cookies["connect.sid"]) {
+    return res.redirect("/");
+  }
+
+  const cookie = req.cookies["connect.sid"].substring(2, 34);
+  if (!store.sessions[cookie]) {
+    return res.redirect("/");
+  }
+
+  return res.render("compendium");
+});
+
+app.get("/learn", (req, res) => {
+  if (!req.cookies["connect.sid"]) {
+    return res.redirect("/");
+  }
+
+  const cookie = req.cookies["connect.sid"].substring(2, 34);
+  if (!store.sessions[cookie]) {
+    return res.redirect("/");
+  }
+
+  return res.render("learn");
+});
+
 app.post("/comment/:id", async (req, res) => {
   if (!req.cookies["connect.sid"]) {
     return res.redirect("/");

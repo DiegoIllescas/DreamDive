@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamDive - Inicio</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+
+<body>
+    <nav>
+        <div class="header-logo">
+            <div class="logo">
+                <img src="logo.png" alt="Logo" width="60px" height="60px">
+            </div>
+            <h2>DreamDive</h2>
+        </div>
+        <div class="navigation">
+            <ul>
+                <li><a href="home"><span class="material-symbols-outlined">home</span>
+                        <p>Inicio</p>
+                    </a></li>
+                <li><a href="explore"><span class="material-symbols-outlined">search</span>
+                        <p>Explorar</p>
+                    </a></li>
+                <li><a href="messages"><span class="material-symbols-outlined">mail</span>
+                        <p>Mensajes</p>
+                    </a></li>
+                <li><a href="saved"><span class="material-symbols-outlined">bookmark</span>
+                        <p>Guardados</p>
+                    </a></li>
+                <li id="personal-info"></li>
+                <li><a href="calendar"><span class="material-symbols-outlined">calendar_month</span>
+                        <p>Calendario</p>
+                    </a></li>
+                <li><a><span class="material-symbols-outlined">settings</span>
+                        <p>Más opciones</p>
+                    </a></li>
+                <li><a href="public" class="primary"><span class="material-symbols-outlined">ink_pen</span>
+                        <p>Publicar</p>
+                    </a></li>
+            </ul>
+        </div>
+        <div class="navigation nav-bottom">
+            <ul>
+                <li><a class="exit" onclick="closeSession()"><span class="material-symbols-outlined">logout</span>
+                        <p>Cerrar sesión</p>
+                    </a></li>
+            </ul>
+        </div>
+    </nav>
+    <main>
+        <div class="header">
+            <a class="nav-selector nav-active" id="for-you">Autores Destacados</a>
+        </div>
+        <div class="for-you">
+            <div id="posts">
+                <div class="post">
+                    <div class="post-header">
+                        <div class="autor-foto" onclick="window.location.href = '/autor/Alfonsina-Storni'">
+                            <img src="imgs/autores/alfonsina_storni.jpg" alt="autor">
+                        </div>
+                        <div class="autor">
+                            <span class="name">Alfonsina Storni</span>
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <h3>Voy a dormir</h3><br>
+                        <p>Dientes de flores, cofia de rocío,<br>manos de hierbas, tú, nodriza fina,<br>tenme prestas
+                            las
+                            sábanas terrosas<br>y el edredón de musgos escardados.<br><br>Voy a dormir, nodriza mía,
+                            aéstame.<br><br>Ponme una lámpara a la cabecera;<br>una constelación; la que te
+                            guste;<br>todas
+                            son
+                            buenas; bájala un poquito.<br><br>Déjame sola: oyes romper los brotes...<br>te acuna un
+                            pie
+                            celeste desde arriba<br>y un pájaro te traza unos compases<br>para que olvides...
+                            Gracias.<br><br>
+                            Ah,
+                            un encargo:<br>si él llama nuevamente por teléfono<br>le dices que no insista, que he
+                            salido...
+                        </p>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="post-header">
+                        <div class="autor-foto" onclick="window.location.href = '/autor/Alfonsina-Storni'">
+                            <img src="imgs/autores/alfonsina_storni.jpg" alt="autor">
+                        </div>
+                        <div class="autor">
+                            <span class="name">Alfonsina Storni</span>
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <h3>Humildad</h3><br>
+                        <p>Yo he sido aquella que paseó orgullosa<br>El oro falso de unas cuantas rimas<br>Sobre su
+                            espalda,
+                            y se creyó gloriosa,<br>De cosechas opimas.<br><br>Ten paciencia, mujer que eres
+                            oscura:<br>Algún día,
+                            la Forma Destructora<br>Que todo lo devora,<br>Borrará mi figura.<br><br>Se bajará a mis
+                            libros,
+                            ya
+                            amarillos,<br>Y alzándola en sus dedos, los carrillos<br>Ligeramente inflados, con un
+                            modo<br>De
+                            gran señor a quien lo aburre todo,<br>De un cansado soplido<br>Me aventará al
+                            olvido.<br><br>Peso
+                            ancestral<br>Tú me dijiste: no lloró mi padre;<br>Tú me dijiste: no lloró mi abuelo;<br>No
+                            han
+                            llorado los hombres de mi raza,<br>Eran de acero.<br><br>Así diciendo te brotó una
+                            lágrima<br>Y
+                            me
+                            cayó en la boca... más veneno:<br>Yo no he bebido nunca en otro vaso<br>Así
+                            pequeño.<br><br>Débil
+                            mujer, pobre mujer que entiende,<br>Dolor de siglos conocí al beberlo:<br>Oh, el alma mía
+                            soportar no puede<br>Todo su peso.
+                        </p>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="post-header">
+                        <div class="autor-foto" onclick="window.location.href = '/autor/Alfonsina-Storni'">
+                            <img src="imgs/autores/alfonsina_storni.jpg" alt="autor">
+                        </div>
+                        <div class="autor">
+                            <span class="name">Alfonsina Storni</span>
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <h3>Versos a la tristeza de Buenos Aires</h3><br>
+                        <p>Tristes calles derechas, agrisadas e iguales,<br>Por donde asoma, a veces, un pedazo de
+                            cielo,<br>Sus fachadas oscuras y el asfalto del suelo<br>Me apagaron los tibios sueños
+                            primaverales.<br><br>Cuánto vagué por ellas, distraída, empapada<br>En el vaho grisáceo,
+                            lento, que las decora.<br>De su monotonía mi alma padece ahora.<br>—¡Alfonsina!— No llames.
+                            Ya no respondo a nada.<br><br>Si en una de tus casas, Buenos Aires, me muero<br>Viendo en
+                            días de otoño tu ciclo prisionero<br>No me será sorpresa la lápida pesada.<br><br>Que entre
+                            tus calles rectas, untadas de su río<br>Apagado, brumoso, desolante y sombrío,<br>Cuando
+                            vagué por ellas, ya estaba yo enterrada.
+                        </p>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="post-header">
+                        <div class="autor-foto" onclick="window.location.href = '/autor/Alfonsina-Storni'">
+                            <img src="imgs/autores/alfonsina_storni.jpg" alt="autor">
+                        </div>
+                        <div class="autor">
+                            <span class="name">Alfonsina Storni</span>
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <h3>¿Qué diría?</h3><br>
+                        <p>¿Qué diría la gente, recortada y vacía,<br>Si en un día fortuito, por ultrafantasía,<br>Me
+                            tiñera el cabello de plateado y violeta,<br>Usara peplo griego, cambiara la peineta<br>Por
+                            cintillo de flores: miosotis o jazmines,<br>Cantara por las calles al compás de
+                            violines,<br>O dijera mis versos recorriendo las plazas,<br>Libertado mi gusto de vulgares
+                            mordazas?<br>¿Irían a mirarme cubriendo las aceras?<br>¿Me quemarían como quemaron
+                            hechiceras?<br>¿Campanas tocarían para llamar a misa?<br>En verdad que pensarlo me da un
+                            poco de risa.
+                        </p>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="post-header">
+                        <div class="autor-foto" onclick="window.location.href = '/autor/Alfonsina-Storni'">
+                            <img src="imgs/autores/alfonsina_storni.jpg" alt="autor">
+                        </div>
+                        <div class="autor">
+                            <span class="name">Alfonsina Storni</span>
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <h3>Hombre pequeñito</h3><br>
+                        <p>Hombre pequeñito, hombre pequeñito,<br>Suelta a tu canario que quiere volar...<br>Yo soy el
+                            canario, hombre pequeñito,<br>Déjame saltar.<br><br>Estuve en tu jaula, hombre
+                            pequeñito,<br>Hombre pequeñito que jaula me das.<br><br>Digo pequeñito porque no me
+                            entiendes,<br>Ni me entenderás.<br><br>Tampoco te entiendo, pero mientras tanto<br>Ábreme la
+                            jaula que quiero escapar;<br>Hombre pequeñito, te amé media hora,<br>No me pidas
+                            más.<br><br>Bien pudiera ser<br>Pudiera ser que todo lo que en verso he sentido<br>No fuera
+                            más
+                            que aquello que nunca pudo ser,<br>No fuera más que algo vedado y reprimido<br>De familia en
+                            familia, de mujer en mujer.<br><br>Dicen que en los solares de mi gente, medido<br>Estaba
+                            todo
+                            aquello que se debía hacer...<br>Dicen que silenciosas las mujeres han sido<br>De mi casa
+                            materna... Ah, bien pudiera ser...<br>A veces a mi madre apuntaron antojos<br>De liberarse,
+                            pero se le subió a los ojos<br>Una honda amargura, y en la sombra lloró.<br><br>Y todo eso
+                            mordiente, vencido, mutilado<br>Todo eso que se hallaba en su alma encerrado,<br>Pienso que
+                            sin quererlo lo he libertado yo.
+                        </p>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="post-header">
+                        <div class="autor-foto" onclick="window.location.href = '/autor/Alfonsina-Storni'">
+                            <img src="imgs/autores/alfonsina_storni.jpg" alt="autor">
+                        </div>
+                        <div class="autor">
+                            <span class="name">Alfonsina Storni</span>
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <h3>Dolor</h3><br>
+                        <p>Quisiera esta tarde divina de octubre<br>pasear por la orilla lejana del mar;<br>que la arena
+                            de oro, y las aguas verdes,<br>y los cielos puros me vieran pasar.<br><br>Ser alta,
+                            soberbia, perfecta, quisiera,<br>como una romana, para concordar<br>con las grandes olas, y
+                            las rocas muertas<br>y las anchas playas que ciñen el mar.<br><br>Con el paso lento, y los
+                            ojos fríos<br>y la boca muda, dejarme llevar;<br>ver cómo se rompen las olas
+                            azules<br>contra los granitos y no parpadear;<br>ver cómo las aves rapaces se comen<br>los
+                            peces pequeños y no despertar;<br>pensar que pudieran las frágiles barcas<br>hundirse en las
+                            aguas y no suspirar;<br>ver que se adelanta, la garganta al aire,<br>el hombre más bello, no
+                            desear amar...<br><br>Perder la mirada, distraídamente,<br>perderla y que nunca la vuelva a
+                            encontrar:<br>y, figura erguida, entre cielo y playa,<br>sentirme el olvido perenne del mar.
+                        </p>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="post-header">
+                        <div class="autor-foto" onclick="window.location.href = '/autor/Alfonsina-Storni'">
+                            <img src="imgs/autores/alfonsina_storni.jpg" alt="autor">
+                        </div>
+                        <div class="autor">
+                            <span class="name">Alfonsina Storni</span>
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <h3>Paz</h3><br>
+                        <p>Vamos hacia los árboles... el sueño<br>Se hará en nosotros por virtud celeste.<br>Vamos hacia
+                            los árboles; la noche<br>Nos será blanda, la tristeza leve.<br><br>Vamos hacia los árboles,
+                            el alma<br>Adormecida de perfume agreste.<br>Pero calla, no hables, sé piadoso;<br>No
+                            despiertes los pájaros que duermen.
+                        </p>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="post-header">
+                        <div class="autor-foto" onclick="window.location.href = '/autor/Alfonsina-Storni'">
+                            <img src="imgs/autores/amado_nervo.jpg" alt="autor">
+                        </div>
+                        <div class="autor">
+                            <span class="name">Amado Nervo</span>
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <h3>Madrigal</h3><br>
+                        <p>Por tus ojos verdes yo me perdería,<br>sirena de aquellas que Ulises, sagaz,<br>amaba y
+                            temía.<br>Por tus ojos verdes yo me perdería.<br><br>Por tus ojos verdes en lo que,
+                            fugaz,<br>brillar suele, a veces, la melancolía;<br>por tus ojos verdes tan llenos de
+                            paz,<br>misteriosos como la esperanza mía;<br>por tus ojos verdes, conjuro eficaz,<br>yo me
+                            salvaría.
+                        </p>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="post-header">
+                        <div class="autor-foto" onclick="window.location.href = '/autor/Alfonsina-Storni'">
+                            <img src="imgs/autores/amado_nervo.jpg" alt="autor">
+                        </div>
+                        <div class="autor">
+                            <span class="name">Amado Nervo</span>
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <h3>En Paz</h3><br>
+                        <p>Muy cerca de mi ocaso, yo te bendigo, Vida,<br>porque nunca me diste ni esperanza
+                            fallida,<br>ni trabajos injustos, ni pena inmerecida;<br><br>porque veo al final de mi rudo
+                            camino<br>que yo fui el arquitecto de mi propio destino;<br><br>que si extraje las mieles o
+                            la hiel de las cosas,<br>fue porque en ellas puse hiel o mieles sabrosas:<br>cuando planté
+                            rosales, coseché siempre rosas.<br><br>Cierto, a mis lozanías va a seguir el
+                            invierno:<br>¡mas tú no me dijiste que mayo fuese eterno!<br><br>Hallé sin duda largas las
+                            noches de mis penas;<br>mas no me prometiste tan sólo noches buenas;<br>y en cambio tuve
+                            algunas santamente serenas...<br><br>Amé, fui amado, el sol acarició mi faz.<br>¡Vida, nada
+                            me debes! ¡Vida, estamos en paz!
+                        </p>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="post-header">
+                        <div class="autor-foto" onclick="window.location.href = '/autor/Alfonsina-Storni'">
+                            <img src="imgs/autores/amado_nervo.jpg" alt="autor">
+                        </div>
+                        <div class="autor">
+                            <span class="name">Amado Nervo</span>
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <h3>El día que me quieras</h3><br>
+                        <p>El día que me quieras tendrá más luz que junio;<br>la noche que me quieras será de
+                            plenilunio,<br>con notas de Beethoven vibrando en cada rayo<br>sus inefables cosas,<br>y
+                            habrá juntas más rosas<br>que en todo el mes de mayo.<br><br>Las fuentes cristalinas<br>irán
+                            por las laderas<br>saltando cristalinas<br>el día que me quieras.<br><br>El día que me
+                            quieras, los sotos escondidos<br>resonarán arpegios nunca jamás oídos.<br>Éxtasis de tus
+                            ojos, todas las primaveras<br>que hubo y habrá en el mundo serán cuando me
+                            quieras.<br><br>Cogidas de la mano cual rubias hermanitas,<br>luciendo golas cándidas, irán
+                            las margaritas<br>por montes y praderas,<br>delante de tus pasos, el día que me
+                            quieras...<br>Y si deshojas una, te dirá su inocente<br>postrer pétalo blanco:
+                            ¡Apasionadamente!<br><br>Al reventar el alba del día que me quieras,<br>tendrán todos los
+                            tréboles cuatro hojas agoreras,<br>y en el estanque, nido de gérmenes ignotos,<br>florecerán
+                            las místicas corolas de los lotos.<br><br>El día que me quieras será cada celaje<br>ala
+                            maravillosa; cada arrebol, miraje<br>de \"Las Mil y una Noches\"; cada brisa un
+                            cantar,<br>cada árbol una lira, cada monte un altar.<br><br>El día que me quieras, para
+                            nosotros dos<br>cabrá en un solo beso la beatitud de Dios.
+                        </p>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="post-header">
+                        <div class="autor-foto" onclick="window.location.href = '/autor/Alfonsina-Storni'">
+                            <img src="imgs/autores/amado_nervo.jpg" alt="autor">
+                        </div>
+                        <div class="autor">
+                            <span class="name">Amado Nervo</span>
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <h3>A una francesa</h3><br>
+                        <p>El mal, que en sus recursos es proficuo,<br>jamás en vil parodia tuvo
+                            empachos:<br>Mefistófeles es un cristo oblicuo<br>que lleva retorcidos los mostachos.<br>Y
+                            tú, que eres unciosa como un ruego<br>y sin mácula y simple como un nardo,<br>tienes trágica
+                            crin dorada a fuego<br>y amarillas pupilas de leopardo.
+                        </p>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="post-header">
+                        <div class="autor-foto" onclick="window.location.href = '/autor/Alfonsina-Storni'">
+                            <img src="imgs/autores/amado_nervo.jpg" alt="autor">
+                        </div>
+                        <div class="autor">
+                            <span class="name">Amado Nervo</span>
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <h3>Identidad</h3><br>
+                        <p>El que sabe que es uno con Dios, logra el Nirvana:<br>un Nirvana en que toda tiniebla se
+                            ilumina;<br>vertiginoso ensanche de la conciencia humana,<br>que es sólo proyección de la
+                            Idea Divina<br>en el Tiempo...<br><br>El fenómeno, lo exterior, vano fruto<br>de la ilusión,
+                            se extingue: ya no hay pluralidad,<br>y el yo, extasiado, abísmase por fin en lo
+                            absoluto,<br>¡y tiene como herencia toda la eternidad!
+                        </p>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="post-header">
+                        <div class="autor-foto" onclick="window.location.href = '/autor/Alfonsina-Storni'">
+                            <img src="imgs/autores/amado_nervo.jpg" alt="autor">
+                        </div>
+                        <div class="autor">
+                            <span class="name">Amado Nervo</span>
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <h3>La puerta</h3><br>
+                        <p>Por esa puerta huyó, diciendo: «¡Nunca!»<br>Por esa puerta ha de volver un día...<br>Al
+                            cerrar esa puerta, dejó trunca<br>la hebra de oro de la esperanza mía.<br>Por esa puerta ha
+                            de volver un día.<br><br>Cada vez que el impulso de la brisa,<br>como una mano débil,
+                            indecisa,<br>levemente sacude la vidriera<br>palpita más aprisa, más aprisa<br>mi corazón
+                            cobarde que la espera.<br><br>Desde mi mesa de trabajo veo<br>la puerta con que sueñan mis
+                            antojos,<br>y acecha agazapado mi deseo<br>en el trémulo fondo de sus ojos.<br><br>¿Por
+                            cuánto tiempo, solitario, esquivo<br>he de aguardar con la mirada incierta<br>a que Dios me
+                            devuelva compasivo<br>a la mujer que huyó por esa puerta?<br><br>¿Cuándo habrán de temblar
+                            esos cristales<br>empujados por sus manos ducales<br>y, con su beso ha de llegarme
+                            ella,<br>cual me llega en las noches invernales<br>el ósculo piadoso de una
+                            estrella?<br><br>¡Oh, Señor!, ya la pálida está alerta:<br>¡oh, Señor, cae la tarde ya en mi
+                            vía<br>y se congela mi esperanza yerta!<br><br>¡Oh, Señor, haz que se abra al fin la
+                            puerta<br>y entre por ella la adorada mía!<br><br>...¡Por esa puerta ha de volver un día!
+                        </p>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="post-header">
+                        <div class="autor-foto" onclick="window.location.href = '/autor/Alfonsina-Storni'">
+                            <img src="imgs/autores/amado_nervo.jpg" alt="autor">
+                        </div>
+                        <div class="autor">
+                            <span class="name">Amado Nervo</span>
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <h3>Éxtasis</h3><br>
+                        <p>Cada rosa gentil ayer nacida,<br>cada aurora que apunta entre sonrojos,<br>dejan mi alma en
+                            el éxtasis sumida...<br>¡Nunca se cansan de mirar mis ojos<br>el perpetuo milagro de la
+                            vida!<br><br>Años ha que contemplo las estrellas<br>en las diáfanas noches españolas<br>y
+                            las encuentro cada vez mas bellas.<br>Años ha que en el mar, conmigo a solas,<br>de las olas
+                            escucho las querellas,<br>y aun me pasma el prodigio de las olas!<br><br>Cada vez hallo la
+                            Naturaleza<br>más sobrenatural, más pura y santa,<br>Para mí, en rededor, todo es
+                            belleza;<br>y con la misma plenitud me encanta<br>la boca de la madre cuando reza<br>que la
+                            boca del niño cuando canta.
+                        </p>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="post-header">
+                        <div class="autor-foto" onclick="window.location.href = '/autor/Alfonsina-Storni'">
+                            <img src="imgs/autores/amado_nervo.jpg" alt="autor">
+                        </div>
+                        <div class="autor">
+                            <span class="name">Amado Nervo</span>
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <h3>Renunciación</h3><br>
+                        <p>¡Oh, Siddharta Gautama!, tú tenías razón:<br>las angustias nos vienen del deseo; el
+                            edén<br>consiste en no anhelar, en la renunciación<br>completa, irrevocable, de toda
+                            posesión;<br>quien no desea nada, dondequiera está bien.<br><br>El deseo es un vaso de
+                            infinita amargura,<br>un pulpo de tentáculos insaciables, que al par<br>que se cortan,
+                            renacen para nuestra tortura.<br>El deseo es el padre del esplín, de la hartura,<br>¡y hay
+                            en él más perfidias que en las olas del mar!<br><br>Quien bebe como el Cínico el agua con la
+                            mano,<br>quien de volver la espalda al dinero es capaz,<br>quien ama sobre todas las cosas
+                            al Arcano,<br>¡ése es el victorioso, el fuerte, el soberano...<br>y no hay paz comparable
+                            con su perenne paz!
+                        </p>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="post-header">
+                        <div class="autor-foto" onclick="window.location.href = '/autor/Alfonsina-Storni'">
+                            <img src="imgs/autores/amado_nervo.jpg" alt="autor">
+                        </div>
+                        <div class="autor">
+                            <span class="name">Amado Nervo</span>
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <h3>Via, Veritas et Vita</h3><br>
+                        <p>Ver en todas las cosas<br>de un espíritu incógnito las huellas;<br>contemplar<br>sin
+                            cesar<br>en las diáfanas noche misteriosas,<br>la santa desnudez de las
+                            estrellas...<br>¡Esperar!<br>¡Esperar!<br>¿Qué? ¡Quién sabe! Tal vez una futura<br>y no
+                            soñada paz... Sereno y fuerte,<br>correr esa aventura<br>sublime y portentosa de la
+                            muerte.<br><br>Mientras, amarlo todo, y no amar nada,<br>sonreír cuando hay sol y cuando hay
+                            brumas;<br>cuidar de que en el áspera jornada<br>no se atrofien las alas, ni oleada<br>de
+                            cieno vil ensucie nuestras plumas.<br><br>Alma: tal es la orientación mejor,<br>tal es el
+                            instintivo derrotero<br>que nos muestra un lucero<br>interior.<br><br>Aunque nada sepamos
+                            del destino,<br>la noche a no temerlo nos convida.<br>Su alfabeto de luz, claro y
+                            divino,<br>nos dice: «Ven a mí: soy el Camino,<br>la Verdad y la Vida».
+                        </p>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="post-header">
+                        <div class="autor-foto" onclick="window.location.href = '/autor/Alfonsina-Storni'">
+                            <img src="imgs/autores/antonio_machado.jpg" alt="autor">
+                        </div>
+                        <div class="autor">
+                            <span class="name">Antonio Machado</span>
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <h3>Orillas del Duero</h3><br>
+                        <p>Se ha asomado una cigüeña a lo alto del campanario.<br>Girando en torno a la torre y al
+                            caserón solitario,<br>ya las golondrinas chillan. Pasaron del blanco invierno,<br>de
+                            nevascas y ventiscas los crudos soplos de infierno.<br>Es una tibia mañana.<br>El sol
+                            calienta un poquito la pobre tierra soriana.<br><br>Pasados los verdes pinos,<br>casi
+                            azules, primavera<br>se ve brotar en los finos<br>chopos de la carretera<br>y del río. El
+                            Duero corre, terso y mudo, mansamente.<br>El campo parece, más que joven,
+                            adolescente.<br><br>Entre las hierbas, alguna humilde flor ha nacido,<br>azul o blanca.
+                            ¡Belleza del campo apenas florido,<br>y mística primavera!<br><br>¡Chopos del camino blanco,
+                            álamos de la ribera,<br>espuma de la montaña<br>ante la azul lejanía;<br>sol del día, claro
+                            día!<br>¡Hermosa tierra de España!
+                        </p>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="post-header">
+                        <div class="autor-foto" onclick="window.location.href = '/autor/Alfonsina-Storni'">
+                            <img src="imgs/autores/antonio_machado.jpg" alt="autor">
+                        </div>
+                        <div class="autor">
+                            <span class="name">Antonio Machado</span>
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <h3>Anoche cuando dormía</h3><br>
+                        <p>Anoche cuando dormía<br>soñé, ¡bendita ilusión!,<br>que una fontana fluía<br>dentro de mi
+                            corazón.<br><br>Di, ¿por qué acequia escondida,<br>agua, vienes hasta mí,<br>manantial de
+                            nueva vida<br>de donde nunca bebí?<br><br>Anoche cuando dormía<br>soñé, ¡bendita
+                            ilusión!,<br>que una colmena tenía<br>dentro de mi corazón;<br><br>y las doradas
+                            abejas<br>iban fabricando en él,<br>con las amarguras viejas<br>blanca cera y dulce
+                            miel.<br><br>Anoche cuando dormía<br>soñé, ¡bendita ilusión!,<br>que un ardiente sol
+                            lucía<br>dentro de mi corazón.<br><br>Era ardiente porque daba<br>calores de rojo
+                            hogar,<br>y era sol porque alumbraba<br>y porque hacía llorar.<br><br>Anoche cuando
+                            dormía<br>soñé, ¡bendita ilusión!,<br>que era Dios lo que tenía<br>dentro de mi corazón.
+                        </p>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="post-header">
+                        <div class="autor-foto" onclick="window.location.href = '/autor/Alfonsina-Storni'">
+                            <img src="imgs/autores/antonio_machado.jpg" alt="autor">
+                        </div>
+                        <div class="autor">
+                            <span class="name">Antonio Machado</span>
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <h3>Retrato</h3><br>
+                        <p>Mi infancia son recuerdos de un patio de Sevilla<br>y un huerto claro donde madura el
+                            limonero;<br>mi juventud, veinte años en tierra de Castilla;<br>mi historia, algunos casos
+                            que recordar no quiero.<br><br>Ni un seductor Mañara ni un Bradomín he sido<br>—ya conocéis
+                            mi torpe aliño indumentario—;<br>mas recibí la flecha que me asignò Cupido<br>y amé cuanto
+                            ellas pueden tener de hospitalario.<br><br>Hay en mis venas gotas de sangre
+                            jacobina,<br>pero mi verso brota de manantial sereno;<br>y, más que un hombre al uso que
+                            sabe su doctrina,<br>soy, en el buen sentido de la palabra, bueno.<br><br>Adoro la
+                            hermosura, y en la moderna estética<br>corté las viejas rosas del huerto de Ronsard;<br>mas
+                            no amo los afeites de la actual cosmética<br>ni soy un ave de esas del nuevo
+                            gay-trinar.<br><br>Desdeño las romanzas de los tenores huecos<br>y el coro de los grillos
+                            que cantan a la luna.<br>A distinguir me paro las voces de los ecos,<br>y escucho solamente,
+                            entre las voces, una.<br><br>¿Soy clásico o romántico? No sé. Dejar quisiera<br>mi verso
+                            como deja el capitán su espada:<br>famosa por la mano viril que la blandiera,<br>no por el
+                            docto oficio del forjador preciada.<br><br>Converso con el hombre que siempre va
+                            conmigo<br>—quien habla solo espera hablar a Dios un día—;<br>mi soliloquio es plática con
+                            este buen amigo<br>que me enseñò el secreto de la filantropía.<br><br>Y al cabo, nada os
+                            debo; debéisme cuanto he escrito.<br>A mi trabajo acudo, con mi dinero pago<br>el traje que
+                            me cubre y la mansiòn que habitò,<br>el pan que me alimenta y el lecho en donde
+                            yago.<br><br>Y cuando llegue el día del último viaje<br>y esté a partir la nave que nunca ha
+                            de tornar,<br>me encontraréis a bordo ligero de equipaje,<br>casi desnudo, como los hijos de
+                            la mar.
+                        </p>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="post-header">
+                        <div class="autor-foto" onclick="window.location.href = '/autor/Alfonsina-Storni'">
+                            <img src="imgs/autores/antonio_machado.jpg" alt="autor">
+                        </div>
+                        <div class="autor">
+                            <span class="name">Antonio Machado</span>
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <h3>Preludio</h3><br>
+                        <p>Mientras la sombra pasa de un santo amor, hoy quiero<br>poner un dulce salmo sobre mi viejo
+                            atril.<br>Acordaré las notas del òrgano severo<br>al suspirar fragante del pífano de
+                            abril.<br><br>Madurarán su aroma las pomas otoñales;<br>la mirra y el incienso salmodiarán
+                            su olor;<br>exhalarán su fresco perfume los rosales,<br>bajo la paz en sombra del tibio
+                            huerto en flor.<br><br>Al grave acorde lento de música y aroma,<br>la sola y vieja y noble
+                            razòn de mi rezar<br>levantará su vuelo süave de paloma,<br>y la palabra blanca se elevará
+                            al altar.
+                        </p>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="post-header">
+                        <div class="autor-foto" onclick="window.location.href = '/autor/Alfonsina-Storni'">
+                            <img src="imgs/autores/antonio_machado.jpg" alt="autor">
+                        </div>
+                        <div class="autor">
+                            <span class="name">Antonio Machado</span>
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <h3>La saeta</h3><br>
+                        <p>Dijo una voz popular:<br>«Quién me presta una escalera<br>para subir al madero<br>para
+                            quitarle los clavos<br>a Jesús el Nazareno?»<br><br>Oh, la saeta, el cantar<br>al Cristo de
+                            los gitanos<br>siempre con sangre en las manos<br>siempre por desenclavar.<br>Cantar del
+                            pueblo andaluz<br>que todas las primaveras<br>anda pidiendo escaleras<br>para subir a la
+                            cruz.<br><br>Cantar de la tierra mía<br>que echa flores<br>al Jesús de la agonía<br>y es la
+                            fe de mis mayores<br>!Oh, no eres tú mi cantar<br>no puedo cantar, ni quiero<br>a este Jesús
+                            del madero<br>sino al que anduvo en la mar!
+                        </p>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="post-header">
+                        <div class="autor-foto" onclick="window.location.href = '/autor/Alfonsina-Storni'">
+                            <img src="imgs/autores/asuncion_silva.jpg" alt="autor">
+                        </div>
+                        <div class="autor">
+                            <span class="name">José Asunción Silva</span>
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <h3>Madrigal</h3><br>
+                        <p>Tu tez rosada y pura, tus formas gráciles<br>De estatuas de Tanagra, tu olor de lilas,<br>El
+                            carmín de tu boca, de labios tersos;<br>Las miradas ardientes de tus pupilas,<br>El ritmo de
+                            tu paso, tu voz velada,<br>Tus cabellos que suelen, si los despeina<br>Tu mano blanca y fina
+                            toda hoyuelada,<br>Cubrirte como fino manto de reina;<br>Tu voz, tus ademanes, tú no te
+                            asombres;<br>Todo eso está ya a gritos pidiendo un hombre.
+                        </p>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="post-header">
+                        <div class="autor-foto" onclick="window.location.href = '/autor/Alfonsina-Storni'">
+                            <img src="imgs/autores/asuncion_silva.jpg" alt="autor">
+                        </div>
+                        <div class="autor">
+                            <span class="name">José Asunción Silva</span>
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <h3>Realidad</h3><br>
+                        <p>Para M<br><br>En el dulce reposo de la tarde<br>Cuando al ponerse el sol en occidente<br>Su
+                            luz dorada, de la vida fuente,<br>Como una hoguera en los espacios arde,<br>O de la noche en
+                            el silencio umbrío<br>Cuando la luna con fulgor de plata<br>Alumbra a trechos el sonante
+                            río<br>Y en sus límpidas ondas se retrata,<br>Entre las sombras de la vida hay horas<br>En
+                            que la realidad que nos circuye<br>A detener el ímpetu no alcanza<br>De nuestra alma que a
+                            lo lejos huye<br>Y a la región de lo ideal se lanza…<br><br>Y entonces cuando pienso en tus
+                            amores<br>Nuestras dos vidas deslizarse veo<br>No cual la realidad que aja sus
+                            flores<br>Sino cual la ilusión de tu deseo.<br>No por las conveniencias
+                            separados,<br>Soñando tú conmigo, yo en tus sueños,<br>Sino juntos los dos en los
+                            collados<br>De la Arcadia risueños;<br>Asidos por las manos a lo lejos<br>Buscando el fin de
+                            la campiña amena<br>A los pálidos rayos de la luna.<br>O del ardiente sol a los
+                            reflejos,<br>Dejando transcurrir una por una<br>Las no contadas horas venturosas<br>Que no
+                            mancha la sombra de una pena<br>Libando amor y deshojando rosas<br>Del verdor y del musgo en
+                            lo sombrío<br>Ocultos en lo ignoto del boscaje<br>Radiante aún de gotas de rocío<br>De
+                            virgen fuerza y de vigor salvaje;<br>Sentados a la orilla del torrente<br>Tú escuchando los
+                            ecos del follaje<br>Yo acariciando -trémula la mano-<br>Tus rizos al caer sobre tu
+                            frente…<br><br>Otras veces trayendo a la memoria<br>Los fantasmas de un tiempo ya
+                            pasado<br>Junto con ellos cual sencilla historia<br>Los ideales de tu amor soñado.<br>Y es
+                            entonces un gótico castillo<br>De altivas torres de musgosas piedras<br>En cuyo muro gris
+                            crecen las hiedras<br>Teatro de nuestro amor santificado.<br><br>Y en reducida y perfumada
+                            estancia<br>Cuyos tapices abrillanta y dora<br>El fuego de la antigua chimenea,<br>Juntos
+                            los dos oímos a distancia<br>Diciéndonos protestas de ternura<br>La voz del agua que al
+                            perderse llora<br>Y el viento que en los árboles cimbrea<br>Entre el silencio de la noche
+                            oscura.<br><br>O en frágil barca en plácida mañana<br>De lago azul flotando en los
+                            cristales<br>Con la mirada errantes contemplamos<br>El cielo, la ribera, los juncales,<br>Y
+                            las nieblas que inciertas, vaporosas,<br>Van a perderse en la región lejana<br>Como se
+                            pierde la esperanza humana<br>O el postrimer aroma de las rosas.<br><br>Mas cuando el alma
+                            en sus ensueños flota,<br>La realidad asoma de improviso<br>No más resuena la encanta
+                            nota<br>Brotan espinas do la rosa brota,<br>Y en crüel se torna el paraíso.<br><br>Vuelvo a
+                            mirar… y pienso que nacimos<br>Para vivir por siempre separados,<br>Que no es una la senda
+                            que seguimos<br>Y que la lumbre que cercana vimos<br>Fue visión de tu amor y tus
+                            cuidados.<br><br>Y al comparar la realidad penosa<br>Con los paisajes de ideal que
+                            miro<br>En el fondo del alma lastimosa<br>Para tu dulce amor -niña piadosa-<br>Para tu dulce
+                            amor surge un suspiro.
+                        </p>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="post-header">
+                        <div class="autor-foto" onclick="window.location.href = '/autor/Alfonsina-Storni'">
+                            <img src="imgs/autores/asuncion_silva.jpg" alt="autor">
+                        </div>
+                        <div class="autor">
+                            <span class="name">José Asunción Silva</span>
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <h3>¿Recuerdas?</h3><br>
+                        <p>¿Recuerdas? Tú no recuerdas<br>Aquellas tardes tranquilas<br>En que en la vereda
+                            angosta<br>Que conduce a tu casita<br>Plegaban a tu contacto<br>Sus hojas las
+                            sensitivas<br>Como al poder misterioso<br>Del amor tu alma de niña<br>En la oscuridad
+                            pasaban<br>Las luciérnagas cual chispas<br>Que bajo la yerba espesa<br>Nuestros dedos
+                            perseguían<br>¡Así también en las horas<br>De mis años de desdicha<br>Cruzaban por entre
+                            sombras<br>Mis esperanzas perdidas!…<br><br>¿Recuerdas?… Tú no recuerdas<br>La cruz de mayo
+                            que hicimos<br>Con violetas silvestres<br>Y con sonrosados lirios<br>Bajo el frondoso
+                            ramaje<br>De tu árbol favorito.<br>Como una lluvia de perlas<br>Sobre blanco raso
+                            níveo<br>Brillaba por los […]<br>En las hojas del rocío!<br>Y los pájaros
+                            cantores<br>Hicieron cerca sus nidos…<br>Después pasé una mañana<br>Y vi tu ramo
+                            marchito<br>Como mi pasión ardiente<br>Por tu infamia y tus desvíos.<br><br>¿Recuerdas?… Tú
+                            no recuerdas<br>Más de esa noche amorosa,<br>La lumbre de tus pupilas,<br>El aliento de tu
+                            boca<br>Entreabierta y perfumada<br>Como un botón de magnolia,<br>Los murmullos
+                            argentinos<br>Del agua bajo las frondas,<br>El brillo de las estrellas<br>Y las esencias
+                            ignotas<br>Que derramaron los genios<br>En las brisas cariñosas,<br>Quedaron como una
+                            huella<br>Que el tiempo aleve no borra<br>¡Ay! para toda la vida<br>¡Escritas en la
+                            memoria!<br><br>¿Recuerdas?… Tú no recuerdas<br>Pero yo, cuando levanta<br>El crepúsculo
+                            sombrío<br>Del fondo de las cañadas<br>Y las tristezas inmensas<br>De lo profundo del
+                            alma<br>Al pasado fugitivo<br>Tiendo la vista cansada<br>Y nuestra historia de
+                            amores<br>Hacia mí tiende las alas.<br>¡Cuando en las horas nocturnas<br>Cabe el esposo que
+                            te ama<br>Tu agitado pensamiento<br>Tenga segundos de calma<br>De aquella pasión
+                            extinta<br>¡Jamás te acuerdes, ingrata!<br><br>¿Recuerdas?… Tú no recuerdas<br>La tarde
+                            aquella en que juntos<br>Bajamos de la colina,<br>Tus grandes ojos oscuros<br>Se anegaban en
+                            los rayos<br>Sonrosados del crepúsculo<br>Y tu voz trémula y triste<br>Como un lejano
+                            murmullo<br>Me hablaba de los temores<br>De tu cuerpo moribundo!<br>Si hubieras entonces
+                            muerto<br>Cómo amara tu sepulcro<br>Ahora, cuando te veo<br>Feliz gozar de tus
+                            triunfos<br>Tan sólo asoma a mis labios<br>Una sonrisa de orgullo!
+                        </p>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="post-header">
+                        <div class="autor-foto" onclick="window.location.href = '/autor/Alfonsina-Storni'">
+                            <img src="imgs/autores/asuncion_silva.jpg" alt="autor">
+                        </div>
+                        <div class="autor">
+                            <span class="name">José Asunción Silva</span>
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <h3>Mariposas</h3><br>
+                        <p>En tu aposento tienes,<br>En urna frágil,<br>Clavadas mariposas,<br>Que, si brillante<br>Rayo
+                            de sol las toca,<br>Parecen nácares<br>O pedazos de cielo,<br>Cielos de tarde,<br>O brillos
+                            opalinos<br>De alas suaves;<br>Y allí están las azules<br>Hijas del aire,<br>Fijas ya para
+                            siempre<br>Las alas ágiles,<br>Las alas, peregrinas<br>De ignotos valles,<br>Que como los
+                            deseos<br>De tu alma amante<br>A la aurora parecen<br>Resucitarse,<br>Cuando de tus
+                            ventanas<br>Las hojas abres<br>Y da el sol en tus ojos<br>Y en los cristales!
+                        </p>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="post-header">
+                        <div class="autor-foto" onclick="window.location.href = '/autor/Alfonsina-Storni'">
+                            <img src="imgs/autores/asuncion_silva.jpg" alt="autor">
+                        </div>
+                        <div class="autor">
+                            <span class="name">José Asunción Silva</span>
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <h3>Suspiro</h3><br>
+                        <p>a A. de W.<br><br>Si en tus recuerdos ves algún día<br>Entre la niebla de lo pasado<br>Surgir
+                            la triste memoria mía<br>Medio borrada ya por los años,<br>Piensa que fuiste siempre mi
+                            anhelo<br>Y si el recuerdo de amor tan santo<br>Mueve tu pecho, nubla tu cielo,<br>Llena de
+                            lágrimas tus ojos garzos;<br>¡Ah, no me busques aquí en la tierra<br>Donde he vivido, donde
+                            he luchado,<br>Sino en el reino de los sepulcros<br>Donde se encuentran paz y descanso!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br><br><br>
+    </main>
+    <footer>
+        <div class="header-footer">
+
+        </div>
+        <div class="footer-container">
+            <div class="event-card">
+                <img src="imgs/book.png" alt="Compendio">
+                <h2>Compendio de Poemas</h2>
+            </div>
+            <div class="compendium">
+                <h3>Eres nuevo en los poemas?</h3>
+                <p>No te preocupes, aprende lo básico desde aquí</p>
+                <button onclick="window.location.href = '/learn'">Aprender</button>
+            </div>
+        </div>
+        <div class="footer"></div>
+    </footer>
+    <script src="scripts/home.js">
+    </script>
+</body>
+
+</html>
