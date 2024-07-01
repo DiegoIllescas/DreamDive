@@ -531,6 +531,70 @@ async function getSavedPost(uuid) {
   return posts;
 }
 
+async function getPostbyId(id, uuid) {
+  let { records } = await driver.executeQuery(
+    "MATCH (p:Poem)<-[:post]-(a:Profile) WHERE ID(p) = $id RETURN a , p",
+    { id: parseInt(id) },
+    { database: "neo4j" }
+  );
+
+  let poem = {};
+
+  for (let record of records) {
+    const result = record.get("p");
+    const autor = record.get("a");
+    poem.id = result.identity;
+    poem.autor = autor.properties.name;
+    poem.uuid = autor.properties.uuid;
+    poem.foto = autor.properties.foto;
+    poem.message = result.properties.message;
+    poem.title = result.properties.title;
+    poem.body = result.properties.body;
+    poem.likes = await getLikes(poem.id.low);
+    poem.likeFlag = await isLiked(uuid, poem.id.low);
+    poem.comments = await getNumComments(poem.id.low);
+    poem.savedFlag = await isSaved(uuid, poem.id.low);
+  }
+
+  return poem;
+}
+
+async function setComment(uuid, id, comment) {
+  const date = new Date().toISOString();
+  let { records, summary } = await driver.executeQuery(
+    "MATCH (p:Poem), (u:Profile {uuid: $uuid}) WHERE ID(p) = $id CREATE (u)-[r:comment {body: $body, created: $date}]->(p) RETURN r",
+    { uuid: uuid, id: parseInt(id), body: comment, date: date },
+    { database: "neo4j" }
+  );
+
+  return summary.counters.updates().relationshipsCreated > 0;
+}
+
+async function getAllComments(id) {
+  let { records } = await driver.executeQuery(
+    "MATCH (p:Poem)<-[r:comment]-(u:Profile) WHERE ID(p) = $id RETURN r, u",
+    { id: parseInt(id) },
+    { database: "neo4j" }
+  );
+
+  let commets = [];
+  for (let record of records) {
+    const coment = record.get("r");
+    const user = record.get("u");
+
+    let comment = {};
+
+    comment.body = coment.properties.body;
+    comment.autor = user.properties.name;
+    comment.foto = user.properties.foto;
+    comment.uuid = user.properties.uuid;
+
+    commets.push(comment);
+  }
+
+  return commets;
+}
+
 module.exports = {
   getUser,
   setUser,
@@ -554,4 +618,7 @@ module.exports = {
   setSave,
   unsetSave,
   getSavedPost,
+  getPostbyId,
+  setComment,
+  getAllComments,
 };

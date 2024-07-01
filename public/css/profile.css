@@ -185,7 +185,9 @@
 }
 
 .interact > a {
+  text-decoration: none;
   cursor: pointer;
+  color: var(--primary);
   display: flex;
   gap: 8px;
 }
@@ -215,4 +217,47 @@
 
 .post-container {
   padding: 1vh 4vw;
+}
+
+#comment {
+  padding-left: 96px;
+}
+
+.post-message > textarea {
+  padding: 16px;
+  height: 15vh;
+  width: 100%;
+  border-radius: 15px;
+  font-size: 18px;
+  border: 1px solid #4767f5;
+  background-color: #030a13;
+  color: var(--primary);
+  font-family: "Inter";
+}
+
+.btn-comment {
+  display: flex;
+  justify-content: end;
+}
+
+.btn-comment > button {
+  cursor: pointer;
+  padding: 8px 16px;
+  width: 15%;
+  border: 0px;
+  color: var(--primary);
+  background-color: var(--tertiary);
+  border-radius: 15px;
+  font-size: 18px;
+}
+
+.btn-comment > button:hover {
+  background-color: #4767f5;
+}
+
+h3 {
+  color: var(--primary);
+  font-size: 24px;
+  letter-spacing: 1px;
+  font-weight: 300;
 }

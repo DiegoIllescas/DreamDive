@@ -240,17 +240,6 @@ app.get("/post", async (req, res) => {
   return res.status(200).json({ success: true, posts: postArr });
 });
 
-app.get("/comments/:id", async (req, res) => {
-  if (!req.cookies["connect.sid"]) {
-    return res.redirect("/");
-  }
-
-  const cookie = req.cookies["connect.sid"].substring(2, 34);
-  if (!store.sessions[cookie]) {
-    return res.redirect("/");
-  }
-});
-
 app.get("/post/foryou", async (req, res) => {
   if (!req.cookies["connect.sid"]) {
     return res.redirect("/");
@@ -285,6 +274,63 @@ app.get("/saved/post", async (req, res) => {
   );
 
   return res.status(200).json({ success: true, posts: posts });
+});
+
+app.get("/comments/:id", (req, res) => {
+  if (!req.cookies["connect.sid"]) {
+    return res.redirect("/");
+  }
+
+  console.log(req.params.id);
+
+  const cookie = req.cookies["connect.sid"].substring(2, 34);
+  if (!store.sessions[cookie]) {
+    return res.redirect("/");
+  }
+
+  return res.render("poem");
+});
+
+app.get("/poem/:id", async (req, res) => {
+  if (!req.cookies["connect.sid"]) {
+    return res.redirect("/");
+  }
+
+  const cookie = req.cookies["connect.sid"].substring(2, 34);
+  if (!store.sessions[cookie]) {
+    return res.redirect("/");
+  }
+
+  const poem = await posts.getById(
+    req.params.id,
+    JSON.parse(store.sessions[cookie]).user.uuid
+  );
+  const user = await users.getUserByUUID(
+    JSON.parse(store.sessions[cookie]).user.uuid
+  );
+  const comments = await posts.getComments(req.params.id);
+
+  return res
+    .status(200)
+    .json({ success: true, poem: [poem], user: user, comments: comments });
+});
+
+app.post("/comment/:id", async (req, res) => {
+  if (!req.cookies["connect.sid"]) {
+    return res.redirect("/");
+  }
+
+  const cookie = req.cookies["connect.sid"].substring(2, 34);
+  if (!store.sessions[cookie]) {
+    return res.redirect("/");
+  }
+
+  const uuid = JSON.parse(store.sessions[cookie]).user.uuid;
+  if (!(await posts.addComment(uuid, req.params.id, req.body.comment))) {
+    return res.status(400).json({ success: false, error: "Algo salio mal" });
+  }
+
+  return res.status(200).json({ success: true });
 });
 
 app.post("/user/add", users.create);

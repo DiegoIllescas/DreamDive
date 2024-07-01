@@ -20,6 +20,97 @@ fetch("http://localhost:4000/user/uuid")
     }
   });
 
+async function getPoem() {
+  const id = window.location.pathname.split("/").pop();
+  const response = await fetch(`/poem/${id}`);
+  const data = await response.json();
+
+  if (data.success) {
+    renderPost(data.poem);
+    renderCommentForm(data.user);
+    renderComments(data.comments);
+    console.log(data.comments);
+  }
+}
+
+function renderComments(comments) {
+  const commentConteiner = document.getElementById("comment");
+  comments.forEach((comment) => {
+    const commentDiv = document.createElement("div");
+    commentDiv.classList.add("comment");
+
+    const commentHTML = `<div class="post-header">
+            <div class="autor-foto" onclick="window.location.href = '/profile/${comment.uuid}'" style="cursor: pointer">
+                <img src="${comment.foto}" alt="autor">
+            </div>
+            <div class="autor">
+                <span class="name">${comment.autor}</span>
+                <spam class="uuid">${comment.uuid}</span>
+            </div>
+        </div>
+        <div class="post-message">
+            <p>${comment.body}</p>
+        </div>`;
+
+    commentDiv.innerHTML = commentHTML;
+
+    commentConteiner.appendChild(commentDiv);
+  });
+}
+
+function renderCommentForm(user) {
+  const commentConteiner = document.getElementById("comment");
+  const comment = document.createElement("div");
+  comment.classList.add("form-comment");
+  const htmlComment = `<h3>Comentarios</h3><br><br><div class="post-header">
+            <div class="autor-foto" onclick="window.location.href = '/profile/${user.uuid}'" style="cursor: pointer">
+                <img src="${user.foto}" alt="autor">
+            </div>
+            <div class="autor">
+                <span class="name">${user.name}</span>
+                <spam class="uuid">${user.uuid}</span>
+            </div>
+        </div>
+        <div class="post-message">
+            <textarea name="comment" id="comment-input" placeholder="Escribe aquí tu opinión"></textarea>
+        </div>
+        <br>
+        <div class="btn-comment">
+          <button onclick="setComment()">Comentar</button>
+        </div>`;
+
+  comment.innerHTML = htmlComment;
+
+  commentConteiner.appendChild(comment);
+}
+
+function setComment() {
+  const comment = document.getElementById("comment-input").value;
+  const options = {
+    method: "POST",
+    mode: "cors",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      comment: comment,
+    }),
+  };
+
+  const id = window.location.pathname.split("/").pop();
+
+  fetch(`/comment/${id}`, options)
+    .then((response) => response.json())
+    .then((data) => {
+      if (!data.success) {
+        alert(data.error);
+      } else {
+        window.location.reload();
+      }
+    });
+}
+
 async function getFollowers() {
   const num = document.getElementById("num_followers");
 
@@ -308,17 +399,15 @@ function renderPost(posts) {
             <p>${body}</p>
          </div>
         <div class="interact">
-            <a><span class="material-symbols-outlined">chat_bubble</span><span class="info-post">${
-              post.comments.low
-            }</span></a>
-            <a id="favorite-${
-              post.id.low
-            }"><span class="material-symbols-outlined ${
+            <a href="/comments/${
+              id.low
+            }"><span class="material-symbols-outlined">chat_bubble</span><span class="info-post">${
+      post.comments.low
+    }</span></a>
+            <a id="favorite-${id.low}"><span class="material-symbols-outlined ${
       post.likeFlag ? "selected" : ""
     }">favorite</span><span class="info-post">${post.likes.low}<span></a>
-            <a id="saved-${
-              post.id.low
-            }"><span class="material-symbols-outlined ${
+            <a id="saved-${id.low}"><span class="material-symbols-outlined ${
       post.savedFlag ? "saved" : ""
     }">bookmark</span></a>
         </div>`;
