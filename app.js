@@ -240,6 +240,17 @@ app.get("/post", async (req, res) => {
   return res.status(200).json({ success: true, posts: postArr });
 });
 
+app.get("/comments/:id", async (req, res) => {
+  if (!req.cookies["connect.sid"]) {
+    return res.redirect("/");
+  }
+
+  const cookie = req.cookies["connect.sid"].substring(2, 34);
+  if (!store.sessions[cookie]) {
+    return res.redirect("/");
+  }
+});
+
 app.get("/post/foryou", async (req, res) => {
   if (!req.cookies["connect.sid"]) {
     return res.redirect("/");
@@ -369,7 +380,23 @@ app.post("/friendship/send", async (req, res) => {
   return res.status(200).json({ success: true });
 });
 
-app.post("/search", entity.get);
+app.post("/search", async (req, res) => {
+  if (!req.cookies["connect.sid"]) {
+    return res.redirect("/");
+  }
+
+  const cookie = req.cookies["connect.sid"].substring(2, 34);
+  if (!store.sessions[cookie]) {
+    return res.redirect("/");
+  }
+
+  const content = await entity.search(
+    req.body.field,
+    JSON.parse(store.sessions[cookie]).user.uuid
+  );
+
+  return res.status(200).json({ success: true, content: content });
+});
 
 app.post("/like/:id", async (req, res) => {
   if (!req.cookies["connect.sid"]) {

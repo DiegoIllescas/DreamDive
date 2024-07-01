@@ -1,17 +1,17 @@
-const {searchUsers, seachPost} = require('../model/conection');
+const { searchUsers, seachPost } = require("../model/conection");
 
-async function get(req, res) {
-    const pattern = req.body.field;
-    let content = {
-        users: [],
-        posts: []
-    };
-    content.users = await searchUsers(pattern);
-    content.posts = await seachPost(pattern);
+async function search(pattern, uuid) {
+  let content = {
+    users: [],
+    posts: [],
+  };
 
-    return res.status(200).json({success: true, content: content});
+  content.users = await searchUsers(pattern);
+  content.posts = await seachPost(pattern, uuid);
+
+  return content;
 }
 
 module.exports = {
-    get
-}
+  search,
+};

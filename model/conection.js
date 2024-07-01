@@ -168,7 +168,7 @@ async function searchUsers(pattern) {
   return users;
 }
 
-async function seachPost(pattern) {
+async function seachPost(pattern, uuid) {
   let { records, summary } = await driver.executeQuery(
     "MATCH (a:Poem)<-[:post]-(b:Profile) WHERE a.title CONTAINS $pattern OR a.body CONTAINS $pattern OR a.message CONTAINS $pattern return id(a) as id, a, b ORDER BY a.created DESC LIMIT 10",
     { pattern: pattern },
@@ -187,6 +187,9 @@ async function seachPost(pattern) {
     postFound.foto = record.get("b").properties.foto;
     postFound.uuid = record.get("b").properties.uuid;
     postFound.likes = await getLikes(postFound.id);
+    postFound.likeFlag = await isLiked(uuid, postFound.id.low);
+    postFound.savedFlag = await isSaved(uuid, postFound.id.low);
+    postFound.comments = await getNumComments(postFound.id);
     posts.push(postFound);
   }
 
