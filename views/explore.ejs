@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DreamDive - Inicio</title>
+    <title>DreamDive - Explorar</title>
     <link rel="icon" href="logo.png" type="image/png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="css/home.css">
@@ -42,14 +42,16 @@
             <form id="search" onsubmit="event.preventDefault()">
                 <input type="text" name="search-field" id="search-field" required>
             </form>
-            <button type="submit" form="search" onclick="search()">Buscar</button>
+            <button type="submit" form="search" onclick="search()"><span class="material-symbols-outlined">search</span><span class="btn-name">Buscar</span></button>
         </div>
         <br>
-        <div id="main-container">
+        <div class="result-container">
+            <div id="main-container">
 
-        </div>
-        <div id="posts">
-
+            </div>
+            <div id="posts">
+    
+            </div>
         </div>
     </main>
     <footer>
