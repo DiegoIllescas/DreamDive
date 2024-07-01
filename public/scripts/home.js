@@ -50,7 +50,8 @@ function renderComments(comments) {
         </div>
         <div class="post-message">
             <p>${comment.body}</p>
-        </div>`;
+        </div>
+        <br><br><br>`;
 
     commentDiv.innerHTML = commentHTML;
 
